@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 import ru.harrier55.project.filmography.R
+import ru.harrier55.project.filmography.data.CardFilm
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,6 +18,8 @@ class MainActivity : AppCompatActivity() {
     private var homeFragment:HomeFragment = HomeFragment()
     private  var favoritFragment: FavoritFragment = FavoritFragment()
     private var ratingsFragment: RatingsFragment = RatingsFragment()
+
+    private var cardFilm: CardFilm = CardFilm("ghgh","jhjkhkj","jhjhjh")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

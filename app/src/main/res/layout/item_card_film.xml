@@ -19,12 +19,27 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:background="@color/purple_200" />
+                android:background="@color/purple_200"
+                android:layout_weight="1"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Название"
+                android:textSize="16sp" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="24dp"
+                android:layout_weight="1"
                 android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Год выпуска" />
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -32,11 +47,6 @@
                     android:layout_weight="1"
                     android:src="@drawable/ic_star" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Год выпуска" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -47,11 +57,7 @@
 
             </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Название"
-                android:textSize="16sp" />
+
 
         </LinearLayout>
 
