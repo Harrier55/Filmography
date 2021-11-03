@@ -1,29 +1,54 @@
 package ru.harrier55.project.filmography.data
 
+typealias CacheListFilmsListener = (listFilms: List<CardFilm>) -> Unit
+
 class CardFilmRepoImpl(): CardFilmRepo {
+
+    private val listeners: MutableSet<CacheListFilmsListener> = mutableSetOf<CacheListFilmsListener>()
 
     private val TAG: String = "@@@"
 
-    private val cardFilm = CardFilm()
+    private var cardFilm = CardFilm()
 
-    private val cacheFilms: ArrayList<CardFilm> = ArrayList()
+    private val cacheListFilms: ArrayList<CardFilm> = ArrayList()
+
 
     fun getCardFilmList(): List<CardFilm>{
-        return ArrayList<CardFilm>(cacheFilms)
+        return ArrayList<CardFilm>(cacheListFilms)
     }
 
-
     override fun createdCardFilm(cardFilm: CardFilm) {
-        cacheFilms.add(cardFilm)
+        cacheListFilms.add(cardFilm)
     }
 
     override fun updateCardFilm() {
         TODO("Not yet implemented")
+        notifyChanges()
     }
 
-    override fun deleteCardFilm() {
-        TODO("Not yet implemented")
+    override fun deleteCardFilm(cardFilm: CardFilm) {
+
+// вариант удаления элемента по индеку
+//        val indexToDelete: Int = cacheListFilms.indexOfFirst { it.id == cardFilm.id }
+//        if (indexToDelete!= -1){
+//            cacheListFilms.removeAt(indexToDelete)
+//        }
+        notifyChanges()
     }
+
+    fun addListener(listener: CacheListFilmsListener){
+        listeners.add(listener)
+    }
+
+    fun removeListener(listener: CacheListFilmsListener){
+        listeners.remove(listener)
+        listener.invoke(cacheListFilms)
+    }
+
+    private fun notifyChanges(){
+        listeners.forEach { it.invoke(cacheListFilms) }
+    }
+
 
 
 }

@@ -4,6 +4,6 @@ interface CardFilmRepo {
 
     fun createdCardFilm(cardFilm: CardFilm)
     fun updateCardFilm()
-    fun deleteCardFilm()
+    fun deleteCardFilm(cardFilm: CardFilm)
 
 }

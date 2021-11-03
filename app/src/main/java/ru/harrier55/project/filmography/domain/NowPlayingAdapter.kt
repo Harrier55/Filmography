@@ -39,7 +39,7 @@ class NowPlayingAdapter(private val cardFilms: List<CardFilm>) :
         val filmRating: TextView = itemView.findViewById(R.id.film_rating_text_view)
     }
 
-    fun onBind(holder: NowPlayingViewHolder, position: Int) {
+    private fun onBind(holder: NowPlayingViewHolder, position: Int) {
         holder.filmPoster.setImageResource(cardFilms[position].filmPoster)
         holder.filmName.text = cardFilms[position].filmName
         holder.filmYearPremiere.text = cardFilms[position].filmYear_premiere

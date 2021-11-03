@@ -19,8 +19,6 @@ class HomeFragment : Fragment() {
 
     private  var cardFilm = CardFilm()
     private var cardFilmRepoImpl= CardFilmRepoImpl()
-
-
     private lateinit var binding: HomeFragment
     private lateinit var adapter: NowPlayingAdapter
 
@@ -42,25 +40,12 @@ class HomeFragment : Fragment() {
 
 
     private fun generateTestRepo(){
-
-        cardFilmRepoImpl.createdCardFilm(CardFilm(R.drawable.star_wars,"Что то иное","hjfhjk","jhfjkfhk"))
+        cardFilmRepoImpl.createdCardFilm(CardFilm(R.drawable.star_wars,"Империя наносит ответный удар","1982","10"))
         cardFilmRepoImpl.createdCardFilm(cardFilm)
         cardFilmRepoImpl.createdCardFilm(cardFilm)
         cardFilmRepoImpl.createdCardFilm(cardFilm)
         cardFilmRepoImpl.createdCardFilm(CardFilm(R.drawable.fox,"Зверополис","2018","8,6"))
         cardFilmRepoImpl.createdCardFilm(cardFilm)
         cardFilmRepoImpl.createdCardFilm(cardFilm)
-        cardFilmRepoImpl.createdCardFilm(cardFilm)
-        cardFilmRepoImpl.createdCardFilm(cardFilm)
-        cardFilmRepoImpl.createdCardFilm(cardFilm)
-        cardFilmRepoImpl.createdCardFilm(cardFilm)
-        cardFilmRepoImpl.createdCardFilm(cardFilm)
-        cardFilmRepoImpl.createdCardFilm(cardFilm)
-        cardFilmRepoImpl.createdCardFilm(cardFilm)
-        cardFilmRepoImpl.createdCardFilm(cardFilm)
-
-
     }
-
-
 }
