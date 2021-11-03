@@ -1,21 +1,27 @@
 package ru.harrier55.project.filmography.data
 
-class CardFilmRepoImpl: CardFilmRepo {
+class CardFilmRepoImpl(): CardFilmRepo {
+
+    private val TAG: String = "@@@"
+
+    private val cardFilm = CardFilm()
 
     private val cacheFilms: ArrayList<CardFilm> = ArrayList()
 
-
-    override fun createdCardFilm():Boolean {
-
-
-        return true
+    fun getCardFilmList(): List<CardFilm>{
+        return ArrayList<CardFilm>(cacheFilms)
     }
 
-    override fun updateCardFilm(): Boolean {
+
+    override fun createdCardFilm(cardFilm: CardFilm) {
+        cacheFilms.add(cardFilm)
+    }
+
+    override fun updateCardFilm() {
         TODO("Not yet implemented")
     }
 
-    override fun deleteCardFilm(): Boolean {
+    override fun deleteCardFilm() {
         TODO("Not yet implemented")
     }
 

@@ -4,12 +4,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 import ru.harrier55.project.filmography.R
 import ru.harrier55.project.filmography.data.CardFilm
+import ru.harrier55.project.filmography.data.CardFilmRepoImpl
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,13 +21,21 @@ class MainActivity : AppCompatActivity() {
     private  var favoritFragment: FavoritFragment = FavoritFragment()
     private var ratingsFragment: RatingsFragment = RatingsFragment()
 
-    private var cardFilm: CardFilm = CardFilm("ghgh","jhjkhkj","jhjhjh")
+    private  var cardFilm = CardFilm()
+    private var cardFilmRepoImpl= CardFilmRepoImpl()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         initBottomNavigation()
+//        cardFilmRepoImpl.getCardFilmList()
+
+        var fragmentManager:FragmentManager = supportFragmentManager
+        fragmentManager.beginTransaction()
+            .add(R.id.fragment_container,homeFragment)
+            .commit()
 
     }
 
@@ -57,4 +67,7 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+
+
 }

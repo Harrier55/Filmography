@@ -2,13 +2,15 @@ package ru.harrier55.project.filmography.data
 
 import android.graphics.Bitmap
 import android.graphics.Picture
+import android.graphics.drawable.Drawable
 import android.view.View
+import ru.harrier55.project.filmography.R
 
 data class CardFilm(
-    var poster: Bitmap,
-    var film_name: String = "Звездные войны",
-    var film_year_premiere: String = "1980",
-    var film_rating: String = "10.0"
+    var filmPoster: Int = R.drawable.star_wars,
+    var filmName: String = "Звездные войны",
+    var filmYear_premiere: String = "1980",
+    var filmRating: String = "10.0"
 ) {
 
 
