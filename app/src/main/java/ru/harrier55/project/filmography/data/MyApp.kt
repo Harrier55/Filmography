@@ -10,6 +10,17 @@ import ru.harrier55.project.filmography.R
         return cardFilmRepoImpl
     }
 
+        override fun onCreate() {
+            super.onCreate()
+            instance = this
+        }
+
+        companion object {
+            lateinit var instance: MyApp
+                private set
+        }
+
+
      fun generateTestRepo(cardFilm: CardFilm){
         cardFilmRepoImpl.createdCardFilm(CardFilm(R.drawable.star_wars,"Империя наносит ответный удар","1982","10"))
         cardFilmRepoImpl.createdCardFilm(cardFilm)
