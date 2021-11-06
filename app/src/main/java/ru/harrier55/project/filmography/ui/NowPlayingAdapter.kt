@@ -43,8 +43,6 @@ class NowPlayingAdapter(private val cardFilms: List<CardFilm>) :
         holder.filmYearPremiere.text = cardFilms[position].filmYear_premiere
         holder.filmRating.text = cardFilms[position].filmRating
     }
-
-
 }
 
 

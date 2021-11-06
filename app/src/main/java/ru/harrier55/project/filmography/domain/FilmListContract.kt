@@ -11,16 +11,12 @@ class FilmListContract {
 
     interface View{
         fun setData(list: List<CardFilm>)
-
-
     }
 
 
     interface Presenter{
         fun attach(view:View)
         fun detach()
-        fun setCardFilmRepoImpl()
+        fun getDataForFilmList()
     }
-
-
 }

@@ -8,22 +8,18 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.harrier55.project.filmography.R
 import ru.harrier55.project.filmography.data.CardFilm
-import ru.harrier55.project.filmography.data.CardFilmRepoImpl
 import ru.harrier55.project.filmography.databinding.FragmentListFilmBinding
 import ru.harrier55.project.filmography.domain.FilmListContract
 import ru.harrier55.project.filmography.domain.FilmListPresenter
 
 
-class FilmListFragment : Fragment(),FilmListContract.View {
+class FilmListFragment : Fragment(), FilmListContract.View {
 //    private lateinit var binding:  FilmListFragment //заменил инициализацию,чтобы исключить ошибки при пересоздании фрагмента
 
-
-
-//    private lateinit var presenter:FilmListPresenter
     private var _binding: FragmentListFilmBinding? = null
     private val binding get() = _binding!!
 
-    private var dataList:List<CardFilm>  = mutableListOf()
+    private var dataList: List<CardFilm> = mutableListOf()
     private lateinit var presenter: FilmListContract.Presenter
 //    private var cardFilmRepoImpl= CardFilmRepoImpl()  // перестал использовать,заменил на Application
 //    private lateinit var cardFilmRepoImpl: CardFilmRepoImpl  // теперь используем синглтон в Application
@@ -32,27 +28,26 @@ class FilmListFragment : Fragment(),FilmListContract.View {
         super.onCreate(savedInstanceState)
         presenter = FilmListPresenter()
         presenter.attach(this)
-        presenter.setCardFilmRepoImpl()  // получение данных через  презентера
+        presenter.getDataForFilmList()  // получение данных через  презентера
 //        initCardFilmRepoImpl() // получение данных из Арр напрямую
         retainInstance = true
     }
 
+    override fun setData(list: List<CardFilm>) {
+        dataList = list
+    }
 
-
-    override fun onCreateView(inflater: LayoutInflater,
-                              container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+                                inflater: LayoutInflater,
+                                container: ViewGroup?,
+                                savedInstanceState: Bundle?
+                            ): View? {
         val view = inflater.inflate(R.layout.fragment_list_film, container, false)
         _binding = FragmentListFilmBinding.bind(view)
 
-        binding.nowPlayingRecyclerView.layoutManager= LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
-//        binding.nowPlayingRecyclerView.adapter = NowPlayingAdapter(cardFilmRepoImpl.getCardFilmList())
+        binding.nowPlayingRecyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.nowPlayingRecyclerView.adapter = NowPlayingAdapter(dataList)
-
-//        val recyclerView: RecyclerView = view.findViewById(R.id.now_playing_recycler_view)  // используем биндинг
-//        recyclerView.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
-//        recyclerView.adapter = NowPlayingAdapter(cardFilmRepoImpl.getCardFilmList())
-
         return view
     }
 
@@ -60,15 +55,6 @@ class FilmListFragment : Fragment(),FilmListContract.View {
         _binding = null
         super.onDestroyView()
     }
-
-    override fun setData(list: List<CardFilm>) {
-
-        dataList = list
-    }
-
-    //    private fun initCardFilmRepoImpl(){
-//        cardFilmRepoImpl= (requireActivity().applicationContext as MyApp).getMyAppCardFilmRepoImpl()
-//    }
 
 
 }
