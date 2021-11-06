@@ -13,7 +13,7 @@ class CardFilmRepoImpl(): CardFilmRepo {
     private val cacheListFilms: ArrayList<CardFilm> = ArrayList()
 
 
-    fun getCardFilmList(): List<CardFilm>{
+     fun getCardFilmList(): List<CardFilm>{
         return ArrayList<CardFilm>(cacheListFilms)
     }
 
@@ -36,11 +36,11 @@ class CardFilmRepoImpl(): CardFilmRepo {
         notifyChanges()
     }
 
-    fun addListener(listener: CacheListFilmsListener){
+    fun addListener(listener: CacheListFilmsListener){  // реализация паттерна Наблюдатель
         listeners.add(listener)
     }
 
-    fun removeListener(listener: CacheListFilmsListener){
+    fun removeListener(listener: CacheListFilmsListener){ // реализация паттерна Наблюдатель
         listeners.remove(listener)
         listener.invoke(cacheListFilms)
     }

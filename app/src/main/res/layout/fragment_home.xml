@@ -13,6 +13,7 @@
         >
 
         <TextView
+            android:id="@+id/one_title_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Home frafment"
@@ -35,6 +36,7 @@
         >
 
         <TextView
+            android:id="@+id/two_title_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Two RecyclerView"

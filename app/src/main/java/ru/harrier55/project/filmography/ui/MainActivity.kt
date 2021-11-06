@@ -12,6 +12,7 @@ import com.google.android.material.navigation.NavigationBarView
 import ru.harrier55.project.filmography.R
 import ru.harrier55.project.filmography.data.CardFilm
 import ru.harrier55.project.filmography.data.CardFilmRepoImpl
+import ru.harrier55.project.filmography.data.MyApp
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,28 +23,38 @@ class MainActivity : AppCompatActivity() {
     private var ratingsFragment: RatingsFragment = RatingsFragment()
 
     private  var cardFilm = CardFilm()
-    private var cardFilmRepoImpl= CardFilmRepoImpl()
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        (applicationContext as MyApp).generateTestRepo(cardFilm)  // заполнить тестовый репозиторий
 
         initBottomNavigation()
-//        cardFilmRepoImpl.getCardFilmList()
 
-        var fragmentManager:FragmentManager = supportFragmentManager
+        val fragmentManager:FragmentManager = supportFragmentManager
         fragmentManager.beginTransaction()
             .add(R.id.fragment_container,homeFragment)
             .commit()
-
     }
+
+
+
+
 
     private fun initBottomNavigation(){
         bottomNavigation = findViewById(R.id.bottom_navigation)
         bottomNavigation.setOnNavigationItemSelectedListener { itemMenu ->
-            var fragmentManager:FragmentManager = supportFragmentManager
+            val fragmentManager:FragmentManager = supportFragmentManager
             when(itemMenu.itemId){
+                R.id.home_bottom_navigation ->{
+                    fragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, homeFragment)
+                        .commit()
+                    true
+                }
+
                 R.id.favorit_bottom_navigation ->{
                     fragmentManager.beginTransaction()
                         .replace(R.id.fragment_container, favoritFragment)
@@ -57,15 +68,10 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 else -> {
-                    fragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, homeFragment)
-                        .commit()
-                    true
+                   true
                 }
             }
         }
-
-
     }
 
 
