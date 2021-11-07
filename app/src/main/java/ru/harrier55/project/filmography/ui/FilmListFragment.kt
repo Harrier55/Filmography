@@ -31,6 +31,8 @@ class FilmListFragment : Fragment(), FilmListContract.View {
         presenter.getDataForFilmList()  // получение данных через  презентера
 //        initCardFilmRepoImpl() // получение данных из Арр напрямую
         retainInstance = true
+
+        
     }
 
     override fun setData(list: List<CardFilm>) {
@@ -47,7 +49,7 @@ class FilmListFragment : Fragment(), FilmListContract.View {
 
         binding.nowPlayingRecyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        binding.nowPlayingRecyclerView.adapter = NowPlayingAdapter(dataList)
+        binding.nowPlayingRecyclerView.adapter = NowPlayingListAdapter(dataList)
         return view
     }
 

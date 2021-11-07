@@ -2,7 +2,7 @@ package ru.harrier55.project.filmography.data
 
 typealias CacheListFilmsListener = (listFilms: List<CardFilm>) -> Unit
 
-class CardFilmRepoImpl(): CardFilmRepo {
+class CardFilmRepoImpl(): IFilmRepo {
 
     private val listeners: MutableSet<CacheListFilmsListener> = mutableSetOf<CacheListFilmsListener>()
 

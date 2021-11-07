@@ -5,15 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.view.menu.MenuView
 import androidx.recyclerview.widget.RecyclerView
 import ru.harrier55.project.filmography.R
-import ru.harrier55.project.filmography.R.drawable.star_wars
 import ru.harrier55.project.filmography.data.CardFilm
 
 
-class NowPlayingAdapter(private val cardFilms: List<CardFilm>) :
-    RecyclerView.Adapter<NowPlayingAdapter.NowPlayingViewHolder>() {
+class NowPlayingListAdapter(private val cardFilms: List<CardFilm>) :
+    RecyclerView.Adapter<NowPlayingListAdapter.NowPlayingViewHolder>() {
 
 
     override fun getItemCount(): Int = cardFilms.size

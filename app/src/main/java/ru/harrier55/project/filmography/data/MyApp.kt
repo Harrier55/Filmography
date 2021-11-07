@@ -22,7 +22,8 @@ import ru.harrier55.project.filmography.R
 
 
      fun generateTestRepo(cardFilm: CardFilm){
-        cardFilmRepoImpl.createdCardFilm(CardFilm(R.drawable.star_wars,"Империя наносит ответный удар","1982","10"))
+        cardFilmRepoImpl.createdCardFilm(CardFilm(R.drawable.star_wars,"Месть ситхов","1982","10"))
+        cardFilmRepoImpl.createdCardFilm(CardFilm(R.drawable.fox,"Зверополис","2018","8,6"))
         cardFilmRepoImpl.createdCardFilm(cardFilm)
         cardFilmRepoImpl.createdCardFilm(cardFilm)
         cardFilmRepoImpl.createdCardFilm(cardFilm)

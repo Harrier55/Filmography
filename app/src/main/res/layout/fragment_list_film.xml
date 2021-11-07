@@ -14,16 +14,14 @@
 
         <TextView
             android:id="@+id/one_title_tv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Home frafment"
-            android:textSize="24sp"/>
+            style="@style/TextTitleFilmList"
+            android:text="@string/now_playing"
+            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/now_playing_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/teal_200">
+            android:layout_height="match_parent">
 
         </androidx.recyclerview.widget.RecyclerView>
 
@@ -37,16 +35,14 @@
 
         <TextView
             android:id="@+id/two_title_tv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Two RecyclerView"
-            android:textSize="24sp"/>
+            style="@style/TextTitleFilmList"
+            android:text="@string/upcoming"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/others_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/teal_700">
+            android:background="#C7CACA">
 
         </androidx.recyclerview.widget.RecyclerView>
 
