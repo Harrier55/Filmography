@@ -27,6 +27,13 @@ class NowPlayingListAdapter(private val cardFilms: List<CardFilm>) :
         onBind(holder, position)
     }
 
+    private fun onBind(holder: NowPlayingViewHolder, position: Int) {
+        holder.filmPoster.setImageResource(cardFilms[position].filmPoster)
+        holder.filmName.text = cardFilms[position].filmName
+        holder.filmYearPremiere.text = cardFilms[position].filmYear_premiere
+        holder.filmRating.text = cardFilms[position].filmRating
+    }
+
     class NowPlayingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val filmPoster: ImageView = itemView.findViewById(R.id.film_poster_image_view)
@@ -35,12 +42,7 @@ class NowPlayingListAdapter(private val cardFilms: List<CardFilm>) :
         val filmRating: TextView = itemView.findViewById(R.id.film_rating_text_view)
     }
 
-    private fun onBind(holder: NowPlayingViewHolder, position: Int) {
-        holder.filmPoster.setImageResource(cardFilms[position].filmPoster)
-        holder.filmName.text = cardFilms[position].filmName
-        holder.filmYearPremiere.text = cardFilms[position].filmYear_premiere
-        holder.filmRating.text = cardFilms[position].filmRating
-    }
+
 }
 
 

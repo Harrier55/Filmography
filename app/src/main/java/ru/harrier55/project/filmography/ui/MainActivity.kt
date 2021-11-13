@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var bottomNavigation: BottomNavigationView
 
-    private var homeFragment: FilmListFragment = FilmListFragment()
+    private var filmListFragment: FilmListFragment = FilmListFragment()
     private var favoritFragment: FavoritFragment = FavoritFragment()
     private var ratingsFragment: RatingsFragment = RatingsFragment()
 
@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         (applicationContext as MyApp).generateTestRepo(cardFilm)  // заполнить тестовый репозиторий
 
         initBottomNavigation()
-        initFragmentmandger(homeFragment)
+        initFragmentmandger(filmListFragment)
 
     }
 
@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         bottomNavigation.setOnNavigationItemSelectedListener { itemMenu ->
             when (itemMenu.itemId) {
                 R.id.home_bottom_navigation -> {
-                    initFragmentmandger(homeFragment);true
+                    initFragmentmandger(filmListFragment);true
                 }
                 R.id.favorit_bottom_navigation -> {
                     initFragmentmandger(favoritFragment);true

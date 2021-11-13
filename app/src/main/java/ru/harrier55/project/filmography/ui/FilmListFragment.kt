@@ -1,10 +1,13 @@
 package ru.harrier55.project.filmography.ui
 
+import android.app.usage.UsageEvents
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.harrier55.project.filmography.R
 import ru.harrier55.project.filmography.data.CardFilm
@@ -32,7 +35,14 @@ class FilmListFragment : Fragment(), FilmListContract.View {
 //        initCardFilmRepoImpl() // получение данных из Арр напрямую
         retainInstance = true
 
-        
+
+// демонстрация жизненного цикла из урока 3 (время 1,54 )
+        lifecycle.addObserver(object: LifecycleObserver{
+            @OnLifecycleEvent(Lifecycle.Event.ON_ANY)
+            fun showLifeCycle(lifecycleOwner: LifecycleOwner,event: Lifecycle.Event){
+                Toast.makeText(context,event.name,Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     override fun setData(list: List<CardFilm>) {
@@ -55,8 +65,11 @@ class FilmListFragment : Fragment(), FilmListContract.View {
 
     override fun onDestroyView() {
         _binding = null
+        presenter.detach()
         super.onDestroyView()
     }
+
+
 
 
 }
