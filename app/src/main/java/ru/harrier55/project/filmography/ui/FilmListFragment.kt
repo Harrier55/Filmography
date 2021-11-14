@@ -48,6 +48,7 @@ class FilmListFragment : Fragment() {
         binding.nowPlayingRecyclerView.adapter = NowPlayingListAdapter(dataListFilm)
 
         liveDataList.observe(viewLifecycleOwner, Observer {
+
             binding.nowPlayingRecyclerView.adapter = NowPlayingListAdapter(it)         // где it - это список dataListFilm приходящий из LiveData
         })
         return view
