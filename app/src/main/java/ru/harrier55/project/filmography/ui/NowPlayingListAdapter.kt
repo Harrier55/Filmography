@@ -1,5 +1,6 @@
 package ru.harrier55.project.filmography.ui
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,14 +9,25 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ru.harrier55.project.filmography.R
 import ru.harrier55.project.filmography.data.CardFilm
+import java.util.*
 
+interface MyOnClickListener{
+    fun onClickItem()
+}
 
-class NowPlayingListAdapter(private val cardFilms: List<CardFilm>) :
-    RecyclerView.Adapter<NowPlayingListAdapter.NowPlayingViewHolder>() {
+class NowPlayingListAdapter(private var myOnClickListener: MyOnClickListener,
+                            private val cardFilms: List<CardFilm>) :
+    RecyclerView.Adapter<NowPlayingListAdapter.NowPlayingViewHolder>(), View.OnClickListener {
+
+    private val TAG:String = "@@@"
+
+    override fun onClick(v: View?) {
+
+        Log.d(TAG, "onClick() адаптера ")
+        myOnClickListener.onClickItem()    }
 
 
     override fun getItemCount(): Int = cardFilms.size
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NowPlayingViewHolder {
         val itemView = LayoutInflater.from(parent.context)
@@ -32,6 +44,9 @@ class NowPlayingListAdapter(private val cardFilms: List<CardFilm>) :
         holder.filmName.text = cardFilms[position].filmName
         holder.filmYearPremiere.text = cardFilms[position].filmYear_premiere
         holder.filmRating.text = cardFilms[position].filmRating
+
+        holder.filmPoster.setOnClickListener(this)
+        holder.filmName.setOnClickListener(this)
     }
 
     class NowPlayingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -41,6 +56,8 @@ class NowPlayingListAdapter(private val cardFilms: List<CardFilm>) :
         val filmYearPremiere: TextView = itemView.findViewById(R.id.film_year_premier_text_view)
         val filmRating: TextView = itemView.findViewById(R.id.film_rating_text_view)
     }
+
+
 
 
 }

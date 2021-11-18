@@ -10,9 +10,11 @@ class FilmListFragmentViewModel : ViewModel(), FilmListContract.ViewModel {
     private var filmList: List<CardFilm> = mutableListOf()
     private var myList: MutableLiveData<List<CardFilm>> = MutableLiveData()
 
+    init {
+        filmList = MyApp.instance.getMyAppCardFilmRepoImpl().getCardFilmList()
+    }
 
     override fun getData(): MutableLiveData<List<CardFilm>> {
-        filmList = MyApp.instance.getMyAppCardFilmRepoImpl().getCardFilmList()
         myList.postValue(filmList)
         return myList
     }

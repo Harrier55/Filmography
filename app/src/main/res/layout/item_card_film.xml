@@ -11,9 +11,10 @@
         android:layout_margin="8dp"
         android:elevation="8dp"
         android:backgroundTint="@color/card_film"
+        android:background="@android:drawable/list_selector_background"
         app:cardCornerRadius="16dp"
-        android:clickable="true"
-        android:focusable="true">
+
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,6 +26,8 @@
                 android:id="@+id/film_poster_image_view"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
+                android:clickable="true"
+
                 />
             <TextView
                 android:id="@+id/film_name_text_view"
@@ -32,7 +35,9 @@
                 android:layout_height="wrap_content"
                 tools:text="Название"
                 android:maxLines="1"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:clickable="true"
+                android:focusable="true" />
 
 
             <LinearLayout

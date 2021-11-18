@@ -1,6 +1,10 @@
 package ru.harrier55.project.filmography.ui
 
+
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
+
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,42 +18,39 @@ import ru.harrier55.project.filmography.data.CardFilm
 import ru.harrier55.project.filmography.databinding.FragmentListFilmBinding
 
 import ru.harrier55.project.filmography.domain.FilmListFragmentViewModel
+import java.lang.RuntimeException
 
 
 class FilmListFragment : Fragment() {
 
+    private val TAG:String = "@@@"
     private var _binding: FragmentListFilmBinding? = null
     private val binding get() = _binding!!
+    private lateinit var liveData: LiveData<List<CardFilm>>
+    private val viewModel by lazy { ViewModelProvider(this).get(FilmListFragmentViewModel::class.java) }
     private var dataListFilm: List<CardFilm> = mutableListOf()
-    private lateinit var liveDataList: LiveData<List<CardFilm>>
-    private val viewModelFilmListFragment by lazy { ViewModelProvider(this).get(FilmListFragmentViewModel::class.java) }
-
+    private lateinit var myAdapter: NowPlayingListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        dataListFilm= MyApp.instance.getMyAppCardFilmRepoImpl().getCardFilmList()  // для тестового запуска
         retainInstance = true
+
     }
 
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater,container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
 
          val view = inflater.inflate(R.layout.fragment_list_film, container, false)
 
+
         _binding = FragmentListFilmBinding.bind(view)
-
-        liveDataList = viewModelFilmListFragment.getData() // получили LiveData
-
+        liveData = viewModel.getData() // получили LiveData
         binding.nowPlayingRecyclerView.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        binding.nowPlayingRecyclerView.adapter = NowPlayingListAdapter(dataListFilm)
 
-        liveDataList.observe(viewLifecycleOwner, Observer {
-
-            binding.nowPlayingRecyclerView.adapter = NowPlayingListAdapter(it)         // где it - это список dataListFilm приходящий из LiveData
+        liveData.observe(viewLifecycleOwner, Observer {
+            binding.nowPlayingRecyclerView.adapter = NowPlayingListAdapter(myOnClickListener,it)  // где it - это список dataListFilm приходящий из LiveData
         })
         return view
     }
@@ -59,12 +60,22 @@ class FilmListFragment : Fragment() {
         super.onDestroyView()
     }
 
-    // демонстрация жизненного цикла из урока 3 (время 1,54 )
-//        lifecycle.addObserver(object: LifecycleObserver{
-//            @OnLifecycleEvent(Lifecycle.Event.ON_ANY)
-//            fun showLifeCycle(lifecycleOwner: LifecycleOwner,event: Lifecycle.Event){
-//                Toast.makeText(context,"Цикл"+event.name,Toast.LENGTH_SHORT).show()
-//            }
-//        })
+    var myOnClickListener = object :MyOnClickListener{
+        override fun onClickItem() {
+            Log.d(TAG, "Сработал обратный вызов из адаптера ")
+        }
+    }
 
+
+
+
+/**  демонстрация жизненного цикла из урока 3 (время 1,54 )
+
+        lifecycle.addObserver(object: LifecycleObserver{
+            @OnLifecycleEvent(Lifecycle.Event.ON_ANY)
+            fun showLifeCycle(lifecycleOwner: LifecycleOwner,event: Lifecycle.Event){
+                Toast.makeText(context,"Цикл"+event.name,Toast.LENGTH_SHORT).show()
+            }
+        })
+**/
 }
