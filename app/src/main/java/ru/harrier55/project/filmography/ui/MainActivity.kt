@@ -1,5 +1,9 @@
 package ru.harrier55.project.filmography.ui
 
+/**
+ *
+ * */
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,11 +16,9 @@ import ru.harrier55.project.filmography.data.MyApp
 class MainActivity : AppCompatActivity() {
 
     private lateinit var bottomNavigation: BottomNavigationView
-
     private var filmListFragment: FilmListFragment = FilmListFragment()
     private var favoritFragment: FavoritFragment = FavoritFragment()
     private var ratingsFragment: RatingsFragment = RatingsFragment()
-
     private var cardFilm = CardFilm()
 
 
