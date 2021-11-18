@@ -23,7 +23,7 @@ import java.lang.RuntimeException
 
 class FilmListFragment : Fragment() {
 
-    private val TAG:String = "@@@"
+    private val TAG: String = "@@@"
     private var _binding: FragmentListFilmBinding? = null
     private val binding get() = _binding!!
     private lateinit var liveData: LiveData<List<CardFilm>>
@@ -38,19 +38,22 @@ class FilmListFragment : Fragment() {
 
     }
 
-    override fun onCreateView(inflater: LayoutInflater,container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
-         val view = inflater.inflate(R.layout.fragment_list_film, container, false)
-
+        val view = inflater.inflate(R.layout.fragment_list_film, container, false)
+        myAdapter = NowPlayingListAdapter(myOnClickListener)
 
         _binding = FragmentListFilmBinding.bind(view)
         liveData = viewModel.getData() // получили LiveData
         binding.nowPlayingRecyclerView.layoutManager =
-                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        binding.nowPlayingRecyclerView.adapter = myAdapter
 
         liveData.observe(viewLifecycleOwner, Observer {
-            binding.nowPlayingRecyclerView.adapter = NowPlayingListAdapter(myOnClickListener,it)  // где it - это список dataListFilm приходящий из LiveData
+            myAdapter.refreshListFilm(it) // где it - это список dataListFilm приходящий из LiveData
         })
         return view
     }
@@ -60,22 +63,20 @@ class FilmListFragment : Fragment() {
         super.onDestroyView()
     }
 
-    var myOnClickListener = object :MyOnClickListener{
+    var myOnClickListener = object : MyOnClickListener {
         override fun onClickItem() {
             Log.d(TAG, "Сработал обратный вызов из адаптера ")
         }
     }
 
 
+    /**  демонстрация жизненного цикла из урока 3 (время 1,54 )
 
-
-/**  демонстрация жизненного цикла из урока 3 (время 1,54 )
-
-        lifecycle.addObserver(object: LifecycleObserver{
-            @OnLifecycleEvent(Lifecycle.Event.ON_ANY)
-            fun showLifeCycle(lifecycleOwner: LifecycleOwner,event: Lifecycle.Event){
-                Toast.makeText(context,"Цикл"+event.name,Toast.LENGTH_SHORT).show()
-            }
-        })
-**/
+    lifecycle.addObserver(object: LifecycleObserver{
+    @OnLifecycleEvent(Lifecycle.Event.ON_ANY)
+    fun showLifeCycle(lifecycleOwner: LifecycleOwner,event: Lifecycle.Event){
+    Toast.makeText(context,"Цикл"+event.name,Toast.LENGTH_SHORT).show()
+    }
+    })
+     **/
 }

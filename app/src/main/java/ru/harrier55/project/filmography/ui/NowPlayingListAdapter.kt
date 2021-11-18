@@ -10,22 +10,27 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.harrier55.project.filmography.R
 import ru.harrier55.project.filmography.data.CardFilm
 import java.util.*
+import kotlin.collections.ArrayList
 
 interface MyOnClickListener{
     fun onClickItem()
 }
 
-class NowPlayingListAdapter(private var myOnClickListener: MyOnClickListener,
-                            private val cardFilms: List<CardFilm>) :
+class NowPlayingListAdapter(private var myOnClickListener: MyOnClickListener) :
     RecyclerView.Adapter<NowPlayingListAdapter.NowPlayingViewHolder>(), View.OnClickListener {
 
     private val TAG:String = "@@@"
+    private var cardFilms:List<CardFilm> = mutableListOf()
+
+    fun refreshListFilm(myFilm: List<CardFilm>){
+        this.cardFilms =myFilm
+        notifyDataSetChanged()
+    }
 
     override fun onClick(v: View?) {
-
         Log.d(TAG, "onClick() адаптера ")
-        myOnClickListener.onClickItem()    }
-
+        myOnClickListener.onClickItem()
+    }
 
     override fun getItemCount(): Int = cardFilms.size
 
