@@ -24,11 +24,14 @@ import java.lang.RuntimeException
 class FilmListFragment : Fragment() {
 
     private val TAG: String = "@@@"
+
     private var _binding: FragmentListFilmBinding? = null
     private val binding get() = _binding!!
+
     private lateinit var liveData: LiveData<List<CardFilm>>
-    private val viewModel by lazy { ViewModelProvider(this).get(FilmListFragmentViewModel::class.java) }
-    private var dataListFilm: List<CardFilm> = mutableListOf()
+
+    private val viewModel by lazy { ViewModelProvider(this)[FilmListFragmentViewModel::class.java] }
+
     private lateinit var myAdapter: NowPlayingListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,7 +66,7 @@ class FilmListFragment : Fragment() {
         super.onDestroyView()
     }
 
-    var myOnClickListener = object : MyOnClickListener {
+    private var myOnClickListener = object : MyOnClickListener {
         override fun onClickItem() {
             Log.d(TAG, "Сработал обратный вызов из адаптера ")
         }

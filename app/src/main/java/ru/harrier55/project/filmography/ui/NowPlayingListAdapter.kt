@@ -9,8 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ru.harrier55.project.filmography.R
 import ru.harrier55.project.filmography.data.CardFilm
-import java.util.*
-import kotlin.collections.ArrayList
+
 
 interface MyOnClickListener{
     fun onClickItem()
