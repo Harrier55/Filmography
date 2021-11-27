@@ -3,4 +3,7 @@
     <string name="now_playing">Now playing</string>
     <string name="upcoming">Upcoming</string>
 
+    <string name="close_App">Покинуть приложение ?</string>
+    <string name="yes">Да</string>
+
 </resources>
