@@ -6,55 +6,41 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import ru.harrier55.project.filmography.R
+import ru.harrier55.project.filmography.databinding.FragmentListFilmBinding
+import ru.harrier55.project.filmography.databinding.FragmentRatingsBinding
+import java.net.URL
+import java.sql.Connection
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [RatingsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class RatingsFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+
+    // Готовый пример запроса для получения информации о фильме "Джентельмены
+    private val TESTURL:String = " https://cloud-api.kinopoisk.dev/movies/1143242/token/7d59f07c9c5ce970ffd275a2a7962a0f"
+
+    private var _binding: FragmentRatingsBinding? = null
+    private val binding get() = _binding!!
+
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_ratings, container, false)
-    }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment RatingsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            RatingsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        val view: View = inflater.inflate(R.layout.fragment_ratings, container, false)
+        _binding = FragmentRatingsBinding.bind(view)
+
+        binding.loadButton.setOnClickListener{
+
+            var connection: Connection? = null
+            var url = URL(TESTURL)
+        }
+
+
+
+        return view
+
+
     }
 }
