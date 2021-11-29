@@ -42,15 +42,16 @@ class FilmListFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
         val view = inflater.inflate(R.layout.fragment_list_film, container, false)
         myAdapter = NowPlayingListAdapter(myOnClickListener)
-
         _binding = FragmentListFilmBinding.bind(view)
         liveData = viewModel.getData() // получили LiveData
+        
         binding.nowPlayingRecyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.nowPlayingRecyclerView.adapter = myAdapter
