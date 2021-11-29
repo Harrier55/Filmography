@@ -24,11 +24,14 @@ import java.lang.RuntimeException
 class FilmListFragment : Fragment() {
 
     private val TAG: String = "@@@"
+
     private var _binding: FragmentListFilmBinding? = null
     private val binding get() = _binding!!
+
     private lateinit var liveData: LiveData<List<CardFilm>>
-    private val viewModel by lazy { ViewModelProvider(this).get(FilmListFragmentViewModel::class.java) }
-    private var dataListFilm: List<CardFilm> = mutableListOf()
+
+    private val viewModel by lazy { ViewModelProvider(this)[FilmListFragmentViewModel::class.java] }
+
     private lateinit var myAdapter: NowPlayingListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,15 +42,16 @@ class FilmListFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
         val view = inflater.inflate(R.layout.fragment_list_film, container, false)
         myAdapter = NowPlayingListAdapter(myOnClickListener)
-
         _binding = FragmentListFilmBinding.bind(view)
         liveData = viewModel.getData() // получили LiveData
+        
         binding.nowPlayingRecyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.nowPlayingRecyclerView.adapter = myAdapter
@@ -63,7 +67,7 @@ class FilmListFragment : Fragment() {
         super.onDestroyView()
     }
 
-    var myOnClickListener = object : MyOnClickListener {
+    private var myOnClickListener = object : MyOnClickListener {
         override fun onClickItem() {
             Log.d(TAG, "Сработал обратный вызов из адаптера ")
         }

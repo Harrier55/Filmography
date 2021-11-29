@@ -6,9 +6,13 @@ package ru.harrier55.project.filmography.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.snackbar.Snackbar.make
 import ru.harrier55.project.filmography.R
 import ru.harrier55.project.filmography.data.CardFilm
 import ru.harrier55.project.filmography.data.MyApp
@@ -22,13 +26,17 @@ class MainActivity : AppCompatActivity() {
     private var cardFilm = CardFilm()
 
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         (applicationContext as MyApp).generateTestRepo(cardFilm)  // заполнить тестовый репозиторий
 
+
+
         initBottomNavigation()
-        initFragmentmandger(filmListFragment)
+        initFragmentManager(filmListFragment)
 
     }
 
@@ -38,13 +46,13 @@ class MainActivity : AppCompatActivity() {
         bottomNavigation.setOnNavigationItemSelectedListener { itemMenu ->
             when (itemMenu.itemId) {
                 R.id.home_bottom_navigation -> {
-                    initFragmentmandger(filmListFragment);true
+                    initFragmentManager(filmListFragment);true
                 }
                 R.id.favorit_bottom_navigation -> {
-                    initFragmentmandger(favoritFragment);true
+                    initFragmentManager(favoritFragment);true
                 }
                 R.id.ratings_bottom_navigation -> {
-                    initFragmentmandger(ratingsFragment);true
+                    initFragmentManager(ratingsFragment);true
                 }
                 else -> {
                     true
@@ -53,12 +61,30 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun initFragmentmandger(fragment: Fragment) {
-        var fragmentManager: FragmentManager = supportFragmentManager
+    private fun initFragmentManager(fragment: Fragment) {
+        val fragmentManager: FragmentManager = supportFragmentManager
         fragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
             .commit()
     }
 
+    override fun onBackPressed() {
+        val fragmentManager: FragmentManager = supportFragmentManager
+        if(fragmentManager.backStackEntryCount == 0){
+                  showClosingApp()
+        }
+ //       super.onBackPressed()
+    }
+
+    fun showClosingApp(){
+
+        val contextView = findViewById<View>(R.id.fragment_container)
+        Snackbar.make(contextView,R.string.close_App,Snackbar.LENGTH_SHORT)
+            .setAnchorView(R.id.bottom_navigation)
+            .setAction(R.string.yes,View.OnClickListener {
+                finish()
+            })
+            .show()
+    }
 
 }
