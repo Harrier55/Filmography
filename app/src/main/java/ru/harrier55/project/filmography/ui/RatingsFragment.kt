@@ -10,7 +10,13 @@ import okhttp3.*
 import ru.harrier55.project.filmography.R
 import ru.harrier55.project.filmography.databinding.FragmentListFilmBinding
 import ru.harrier55.project.filmography.databinding.FragmentRatingsBinding
+import java.io.BufferedReader
 import java.io.IOException
+import java.io.InputStreamReader
+import java.net.HttpURLConnection
+
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.RequestBody.Companion.toRequestBody
 
 import java.net.URL
 import java.sql.Connection
@@ -41,6 +47,28 @@ class RatingsFragment : Fragment() {
 
         binding.loadButton.setOnClickListener{
 
+//      Реализация HttpURLConnection в потоке
+
+//            Thread{
+//                var connection:HttpURLConnection? = null
+//
+//                val url = URL(TESTURL)
+//                connection = url.openConnection() as HttpURLConnection
+//                connection.requestMethod = "GET"
+//                connection.connectTimeout = 5_000
+//
+//                val bufferedReader = BufferedReader(InputStreamReader(connection.inputStream))
+//                val result = bufferedReader.readLines().toString()
+//
+//                activity?.runOnUiThread {
+//                        binding.loadResultTV.text = result
+//                    }
+//
+//
+//            }
+//                .start()
+
+//      Реализация OKHTTP
             val request = Request.Builder()
                 .url(TESTURL)
                 .build()
@@ -54,11 +82,14 @@ class RatingsFragment : Fragment() {
                 override fun onResponse(call: Call, response: Response) {
                     Log.d(TAG, "onResponse: ")
 
+                    val mediaType = "application/json; charset=utf-8".toMediaType()
+
+                    val requestBody = response.toString().toRequestBody(mediaType)
+
                     activity?.runOnUiThread {
-                        binding.loadResultTV.text = response.toString()
+                        binding.loadResultTV.text = response.body!!.string()
                     }
                 }
-
 
             })
         }
