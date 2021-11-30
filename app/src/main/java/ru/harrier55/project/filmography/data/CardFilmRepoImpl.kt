@@ -1,6 +1,6 @@
 package ru.harrier55.project.filmography.data
 
-typealias CacheListFilmsListener = (listFilms: List<CardFilm>) -> Unit
+typealias CacheListFilmsListener = (listFilms: List<CardFilmEntity>) -> Unit
 
 class CardFilmRepoImpl(): IFilmRepo {
 
@@ -8,16 +8,16 @@ class CardFilmRepoImpl(): IFilmRepo {
 
     private val TAG: String = "@@@"
 
-    private var cardFilm = CardFilm()
+    private var cardFilm = CardFilmEntity()
 
-    private val cacheListFilms: ArrayList<CardFilm> = ArrayList()
+    private val cacheListFilms: ArrayList<CardFilmEntity> = ArrayList()
 
 
-     fun getCardFilmList(): List<CardFilm>{
-        return ArrayList<CardFilm>(cacheListFilms)
+     fun getCardFilmList(): List<CardFilmEntity>{
+        return ArrayList<CardFilmEntity>(cacheListFilms)
     }
 
-    override fun createdCardFilm(cardFilm: CardFilm) {
+    override fun createdCardFilm(cardFilm: CardFilmEntity) {
         cacheListFilms.add(cardFilm)
     }
 
@@ -26,7 +26,7 @@ class CardFilmRepoImpl(): IFilmRepo {
         notifyChanges()
     }
 
-    override fun deleteCardFilm(cardFilm: CardFilm) {
+    override fun deleteCardFilm(cardFilm: CardFilmEntity) {
 
 // вариант удаления элемента по индеку
 //        val indexToDelete: Int = cacheListFilms.indexOfFirst { it.id == cardFilm.id }

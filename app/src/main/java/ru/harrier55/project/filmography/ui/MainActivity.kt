@@ -7,14 +7,12 @@ package ru.harrier55.project.filmography.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.snackbar.Snackbar.make
 import ru.harrier55.project.filmography.R
-import ru.harrier55.project.filmography.data.CardFilm
+import ru.harrier55.project.filmography.data.CardFilmEntity
 import ru.harrier55.project.filmography.data.MyApp
 
 class MainActivity : AppCompatActivity() {
@@ -23,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     private var filmListFragment: FilmListFragment = FilmListFragment()
     private var favoritFragment: FavoritFragment = FavoritFragment()
     private var ratingsFragment: RatingsFragment = RatingsFragment()
-    private var cardFilm = CardFilm()
+    private var cardFilm = CardFilmEntity()
 
 
 

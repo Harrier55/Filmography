@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ru.harrier55.project.filmography.R
-import ru.harrier55.project.filmography.data.CardFilm
+import ru.harrier55.project.filmography.data.CardFilmEntity
 
 
 interface MyOnClickListener{
@@ -19,9 +19,9 @@ class NowPlayingListAdapter(private var myOnClickListener: MyOnClickListener) :
     RecyclerView.Adapter<NowPlayingListAdapter.NowPlayingViewHolder>(), View.OnClickListener {
 
     private val TAG:String = "@@@"
-    private var cardFilms:List<CardFilm> = mutableListOf()
+    private var cardFilms:List<CardFilmEntity> = mutableListOf()
 
-    fun refreshListFilm(myFilm: List<CardFilm>){
+    fun refreshListFilm(myFilm: List<CardFilmEntity>){
         this.cardFilms =myFilm
         notifyDataSetChanged()
     }

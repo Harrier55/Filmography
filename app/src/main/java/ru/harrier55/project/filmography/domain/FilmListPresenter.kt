@@ -1,11 +1,6 @@
 package ru.harrier55.project.filmography.domain
 
 
-import ru.harrier55.project.filmography.data.CardFilm
-
-import ru.harrier55.project.filmography.data.MyApp
-
-
 //class FilmListPresenter:FilmListContract.Presenter {
 //
 //    private var view: FilmListContract.View? = null

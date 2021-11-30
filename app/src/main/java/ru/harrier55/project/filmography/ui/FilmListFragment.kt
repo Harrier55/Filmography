@@ -1,7 +1,6 @@
 package ru.harrier55.project.filmography.ui
 
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 
@@ -13,12 +12,11 @@ import android.view.ViewGroup
 import androidx.lifecycle.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.harrier55.project.filmography.R
-import ru.harrier55.project.filmography.data.CardFilm
+import ru.harrier55.project.filmography.data.CardFilmEntity
 
 import ru.harrier55.project.filmography.databinding.FragmentListFilmBinding
 
 import ru.harrier55.project.filmography.domain.FilmListFragmentViewModel
-import java.lang.RuntimeException
 
 
 class FilmListFragment : Fragment() {
@@ -28,7 +26,7 @@ class FilmListFragment : Fragment() {
     private var _binding: FragmentListFilmBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var liveData: LiveData<List<CardFilm>>
+    private lateinit var liveData: LiveData<List<CardFilmEntity>>
 
     private val viewModel by lazy { ViewModelProvider(this)[FilmListFragmentViewModel::class.java] }
 

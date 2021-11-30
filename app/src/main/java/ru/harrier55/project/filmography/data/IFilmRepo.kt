@@ -2,8 +2,8 @@ package ru.harrier55.project.filmography.data
 
 interface IFilmRepo {
 
-    fun createdCardFilm(cardFilm: CardFilm)
+    fun createdCardFilm(cardFilm: CardFilmEntity)
     fun updateCardFilm()
-    fun deleteCardFilm(cardFilm: CardFilm)
+    fun deleteCardFilm(cardFilm: CardFilmEntity)
 
 }
