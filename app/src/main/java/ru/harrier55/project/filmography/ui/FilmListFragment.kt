@@ -49,6 +49,8 @@ class FilmListFragment : Fragment() {
         myAdapter = NowPlayingListAdapter(myOnClickListener)
         _binding = FragmentListFilmBinding.bind(view)
         liveData = viewModel.getData() // получили LiveData
+
+
         
         binding.nowPlayingRecyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -56,6 +58,7 @@ class FilmListFragment : Fragment() {
 
         liveData.observe(viewLifecycleOwner, Observer {
             myAdapter.refreshListFilm(it) // где it - это список dataListFilm приходящий из LiveData
+
         })
         return view
     }

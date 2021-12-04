@@ -8,8 +8,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import com.example.example.KinopoiskEntities
+import com.example.example.Movies
+import com.example.example.Pagination
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
+import com.google.gson.reflect.TypeToken
 import okhttp3.*
 import ru.harrier55.project.filmography.R
 import ru.harrier55.project.filmography.databinding.FragmentListFilmBinding
@@ -22,10 +28,12 @@ import java.net.HttpURLConnection
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
 import ru.harrier55.project.filmography.data.CardFilmKinopoiskEntity
+import java.lang.StringBuilder
 
 import java.net.URL
 import java.sql.Connection
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class RatingsFragment : Fragment() {
@@ -41,8 +49,8 @@ class RatingsFragment : Fragment() {
 
 
     // Готовый пример запроса для получения информации о фильме "Джентельмены
-    var TESTURL:String = " https://cloud-api.kinopoisk.dev/movies/1143242/token/7d59f07c9c5ce970ffd275a2a7962a0f"
-//    var TESTURL : String = " https://cloud-api.kinopoisk.dev/movies/all/page/666/token/7d59f07c9c5ce970ffd275a2a7962a0f"
+//    var TESTURL:String = " https://cloud-api.kinopoisk.dev/movies/1143242/token/7d59f07c9c5ce970ffd275a2a7962a0f"
+    var TESTURL : String = " https://cloud-api.kinopoisk.dev/movies/all/page/666/token/7d59f07c9c5ce970ffd275a2a7962a0f"
 
 
     private var _binding: FragmentRatingsBinding? = null
@@ -61,59 +69,52 @@ class RatingsFragment : Fragment() {
 
         binding.loadButton.setOnClickListener{
 
-//      Реализация HttpURLConnection в потоке
 
-//            Thread{
-//                var connection:HttpURLConnection? = null
-//
-//                val url = URL(TESTURL)
-//                connection = url.openConnection() as HttpURLConnection
-//                connection.requestMethod = "GET"
-//                connection.connectTimeout = 5_000
-//
-//                val bufferedReader = BufferedReader(InputStreamReader(connection.inputStream))
-//                val result = bufferedReader.readLines().toString()
-//
-//                activity?.runOnUiThread {
-//                        binding.loadResultTV.text = result
-//                    }
-//            }
-//                .start()
+            /***      Реализация OKHTTP
 
-//      Реализация OKHTTP
+             */
             val request = Request.Builder()
                 .url(TESTURL)
                 .build()
 
-//            okHttpClient.newCall(request).enqueue(object : Callback{
-//                override fun onFailure(call: Call, e: IOException) {
-//                    e.printStackTrace()
-//                    Log.d(TAG, "onFailure: ")
-//                }
-//
-//                override fun onResponse(call: Call, response: Response) {
-//                    Log.d(TAG, "onResponse: ")
-//                    val resultJsonString: String = response.body!!.string()
-//
-//                    cardFilmKinopoiskEntity =  gson.fromJson(resultJsonString, CardFilmKinopoiskEntity::class.java)
-//
-//                    activity?.runOnUiThread {
-////                        binding.loadResultTV.text = resultJsonString
-//                       binding.loadResultTV.text = cardFilmKinopoiskEntity?.description
-//                    }
-//
-//                    Handler(Looper.getMainLooper()).post {
-//                        // todo  можно протеститовать на нем
-//                    }
-//                }
-//
-//            })
+            okHttpClient.newCall(request).enqueue(object : Callback{
+                override fun onFailure(call: Call, e: IOException) {
+                    e.printStackTrace()
+                    Log.d(TAG, "onFailure: ")
+                }
 
-              gson.fromJson(testJson,Array<CardFilmKinopoiskEntity>::class.java)
+                override fun onResponse(call: Call, response: Response) {
+                    Log.d(TAG, "onResponse: ")
+                    var resultJsonString: String
+
+                    if(response.code == 200){
+                        resultJsonString= response.body!!.string()
+                    } else{
+                        resultJsonString = testJson                   }
 
 
+                    val kinopoiskEntities:KinopoiskEntities = gson.fromJson(resultJsonString, KinopoiskEntities::class.java)
 
-            binding.loadResultTV.text
+
+                    activity?.runOnUiThread {
+
+                        Toast.makeText(activity,"Код ответа - " + response.code.toString(), Toast.LENGTH_SHORT).show()
+
+                        val sb =  StringBuilder()
+                        kinopoiskEntities.movies.forEach{array->
+                            sb.appendLine(array.title)
+                            sb.appendLine(array.description)
+                        }
+
+                        binding.loadResultTV.text = sb.toString()
+
+                    }
+                }
+            })
+
+
+
+
 
 
         }

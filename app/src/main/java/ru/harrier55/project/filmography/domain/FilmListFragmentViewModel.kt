@@ -18,6 +18,8 @@ class FilmListFragmentViewModel : ViewModel(), FilmListContract.ViewModel {
         myList.postValue(filmList)
         return myList
     }
+
+
 }
 
 
