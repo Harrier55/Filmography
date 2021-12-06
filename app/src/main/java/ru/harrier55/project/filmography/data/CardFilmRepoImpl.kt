@@ -13,10 +13,6 @@ class CardFilmRepoImpl(): IFilmRepo {
     private val cacheListFilms: ArrayList<CardFilmEntity> = ArrayList()
 
 
-     fun getCardFilmList(): List<CardFilmEntity>{
-        return ArrayList<CardFilmEntity>(cacheListFilms)
-    }
-
     override fun createdCardFilm(cardFilm: CardFilmEntity) {
         cacheListFilms.add(cardFilm)
     }
@@ -34,6 +30,9 @@ class CardFilmRepoImpl(): IFilmRepo {
 //            cacheListFilms.removeAt(indexToDelete)
 //        }
         notifyChanges()
+    }
+    fun getCardFilmList(): List<CardFilmEntity>{
+        return ArrayList<CardFilmEntity>(cacheListFilms)
     }
 
     fun addListener(listener: CacheListFilmsListener){  // реализация паттерна Наблюдатель

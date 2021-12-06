@@ -58,7 +58,7 @@ class FilmListFragment : Fragment() {
 
         liveData.observe(viewLifecycleOwner, Observer {
             myAdapter.refreshListFilm(it) // где it - это список dataListFilm приходящий из LiveData
-
+            myAdapter.notifyDataSetChanged()
         })
         return view
     }

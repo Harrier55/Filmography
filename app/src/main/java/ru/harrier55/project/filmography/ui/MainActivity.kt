@@ -14,6 +14,7 @@ import com.google.android.material.snackbar.Snackbar
 import ru.harrier55.project.filmography.R
 import ru.harrier55.project.filmography.data.CardFilmEntity
 import ru.harrier55.project.filmography.data.MyApp
+import ru.harrier55.project.filmography.data.WebConnection
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     private var favoritFragment: FavoritFragment = FavoritFragment()
     private var ratingsFragment: RatingsFragment = RatingsFragment()
     private var cardFilm = CardFilmEntity()
+    private var webConnection = WebConnection()
 
 
 
@@ -31,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         (applicationContext as MyApp).generateTestRepo(cardFilm)  // заполнить тестовый репозиторий
 
-
+        webConnection.getDataKinopoisk()
 
         initBottomNavigation()
         initFragmentManager(filmListFragment)
@@ -44,13 +46,16 @@ class MainActivity : AppCompatActivity() {
         bottomNavigation.setOnNavigationItemSelectedListener { itemMenu ->
             when (itemMenu.itemId) {
                 R.id.home_bottom_navigation -> {
-                    initFragmentManager(filmListFragment);true
+                    initFragmentManager(filmListFragment)
+                    true
                 }
                 R.id.favorit_bottom_navigation -> {
-                    initFragmentManager(favoritFragment);true
+                    initFragmentManager(favoritFragment)
+                    true
                 }
                 R.id.ratings_bottom_navigation -> {
-                    initFragmentManager(ratingsFragment);true
+                    initFragmentManager(ratingsFragment)
+                    true
                 }
                 else -> {
                     true

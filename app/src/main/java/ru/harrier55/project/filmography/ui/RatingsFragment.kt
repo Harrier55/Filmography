@@ -1,39 +1,18 @@
 package ru.harrier55.project.filmography.ui
 
+import KinopoiskBase
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.example.example.KinopoiskEntities
-import com.example.example.Movies
-import com.example.example.Pagination
-import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
-import com.google.gson.annotations.SerializedName
-import com.google.gson.reflect.TypeToken
 import okhttp3.*
 import ru.harrier55.project.filmography.R
-import ru.harrier55.project.filmography.databinding.FragmentListFilmBinding
 import ru.harrier55.project.filmography.databinding.FragmentRatingsBinding
-import java.io.BufferedReader
 import java.io.IOException
-import java.io.InputStreamReader
-import java.net.HttpURLConnection
-
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.RequestBody.Companion.toRequestBody
-import ru.harrier55.project.filmography.data.CardFilmKinopoiskEntity
-import java.lang.StringBuilder
-
-import java.net.URL
-import java.sql.Connection
-import java.util.*
-import kotlin.collections.ArrayList
 
 
 class RatingsFragment : Fragment() {
@@ -44,14 +23,12 @@ class RatingsFragment : Fragment() {
 
     private val gson by lazy { Gson() }
 
-     var cardFilmKinopoiskEntity:CardFilmKinopoiskEntity? = null
-
 
 
     // Готовый пример запроса для получения информации о фильме "Джентельмены
 //    var TESTURL:String = " https://cloud-api.kinopoisk.dev/movies/1143242/token/7d59f07c9c5ce970ffd275a2a7962a0f"
-    var TESTURL : String = " https://cloud-api.kinopoisk.dev/movies/all/page/666/token/7d59f07c9c5ce970ffd275a2a7962a0f"
-
+//    var TESTURL : String = " https://cloud-api.kinopoisk.dev/movies/all/page/666/token/7d59f07c9c5ce970ffd275a2a7962a0f"
+    var TESTURL : String = "https://api.kinopoisk.dev/review?search=325&field=movieId&page=10&limit=10&token=68MMRD5-PBNMTR6-NREDMZQ-HDHYHYS"
 
     private var _binding: FragmentRatingsBinding? = null
     private val binding get() = _binding!!
@@ -71,7 +48,6 @@ class RatingsFragment : Fragment() {
 
 
             /***      Реализация OKHTTP
-
              */
             val request = Request.Builder()
                 .url(TESTURL)
@@ -82,18 +58,18 @@ class RatingsFragment : Fragment() {
                     e.printStackTrace()
                     Log.d(TAG, "onFailure: ")
                 }
-
+                lateinit var resultJsonString: String
                 override fun onResponse(call: Call, response: Response) {
                     Log.d(TAG, "onResponse: ")
-                    var resultJsonString: String
+
 
                     if(response.code == 200){
                         resultJsonString= response.body!!.string()
                     } else{
-                        resultJsonString = testJson                   }
+                                     }
 
+                    val kinopoiskBase: KinopoiskBase =  gson.fromJson(resultJsonString, KinopoiskBase::class.java)
 
-                    val kinopoiskEntities:KinopoiskEntities = gson.fromJson(resultJsonString, KinopoiskEntities::class.java)
 
 
                     activity?.runOnUiThread {
@@ -101,9 +77,9 @@ class RatingsFragment : Fragment() {
                         Toast.makeText(activity,"Код ответа - " + response.code.toString(), Toast.LENGTH_SHORT).show()
 
                         val sb =  StringBuilder()
-                        kinopoiskEntities.movies.forEach{array->
+                        kinopoiskBase.docs.forEach{array->
                             sb.appendLine(array.title)
-                            sb.appendLine(array.description)
+                            sb.appendLine(array.author)
                         }
 
                         binding.loadResultTV.text = sb.toString()
