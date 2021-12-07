@@ -28,7 +28,7 @@ class RatingsFragment : Fragment() {
     // Готовый пример запроса для получения информации о фильме "Джентельмены
 //    var TESTURL:String = " https://cloud-api.kinopoisk.dev/movies/1143242/token/7d59f07c9c5ce970ffd275a2a7962a0f"
 //    var TESTURL : String = " https://cloud-api.kinopoisk.dev/movies/all/page/666/token/7d59f07c9c5ce970ffd275a2a7962a0f"
-    var TESTURL : String = "https://api.kinopoisk.dev/review?search=325&field=movieId&page=10&limit=10&token=68MMRD5-PBNMTR6-NREDMZQ-HDHYHYS"
+    var TESTURL : String = "https://api.kinopoisk.dev/review?search=326&field=movieId&page=10&limit=10&token=68MMRD5-PBNMTR6-NREDMZQ-HDHYHYS"
 
     private var _binding: FragmentRatingsBinding? = null
     private val binding get() = _binding!!
@@ -46,7 +46,7 @@ class RatingsFragment : Fragment() {
 
         binding.loadButton.setOnClickListener{
 
-
+            Log.d(TAG, "onCreateView: RatingsFragment  onClick")
             /***      Реализация OKHTTP
              */
             val request = Request.Builder()
@@ -60,7 +60,7 @@ class RatingsFragment : Fragment() {
                 }
                 lateinit var resultJsonString: String
                 override fun onResponse(call: Call, response: Response) {
-                    Log.d(TAG, "onResponse: ")
+                    Log.d(TAG, "onResponse: RatingsFragment")
 
 
                     if(response.code == 200){
@@ -74,7 +74,7 @@ class RatingsFragment : Fragment() {
 
                     activity?.runOnUiThread {
 
-                        Toast.makeText(activity,"Код ответа - " + response.code.toString(), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity,"Код ответа - RatingsFragment" + response.code.toString(), Toast.LENGTH_SHORT).show()
 
                         val sb =  StringBuilder()
                         kinopoiskBase.docs.forEach{array->

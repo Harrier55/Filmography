@@ -1,5 +1,6 @@
 package ru.harrier55.project.filmography.ui
 
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -21,13 +22,14 @@ class NowPlayingListAdapter(private var myOnClickListener: MyOnClickListener) :
     private val TAG:String = "@@@"
     private var cardFilms:List<CardFilmEntity> = mutableListOf()
 
+    @SuppressLint("NotifyDataSetChanged")
     fun refreshListFilm(myFilm: List<CardFilmEntity>){
         this.cardFilms =myFilm
         notifyDataSetChanged()
     }
 
     override fun onClick(v: View?) {
-        Log.d(TAG, "onClick() адаптера ")
+        Log.d(TAG, "NowPlayingListAdapter  клик ")
         myOnClickListener.onClickItem()
     }
 

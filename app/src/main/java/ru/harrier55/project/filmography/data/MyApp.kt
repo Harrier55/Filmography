@@ -3,18 +3,22 @@ package ru.harrier55.project.filmography.data
 import Docs
 import KinopoiskBase
 import android.app.Application
+import android.util.Log
 import ru.harrier55.project.filmography.R
 
 class MyApp : Application() {
+    private val TAG:String = "@@@"
+    
     private val cardFilmRepoImpl = CardFilmRepoImpl()
 
-
     fun getMyAppCardFilmRepoImpl(): CardFilmRepoImpl {
+        Log.d(TAG, "My App __getMyAppCardFilmRepoImpl: в репозитоии  cardFilmRepoImpl лежат = " )
         return cardFilmRepoImpl
     }
 
     override fun onCreate() {
         super.onCreate()
+        Log.d(TAG, "override fun onCreate in MyApp: ")
         instance = this
     }
 
@@ -26,30 +30,23 @@ class MyApp : Application() {
 
     fun generateTestRepo(cardFilm: CardFilmEntity) {
 
+        Log.d(TAG, "MyApp __generateRepoFromWeb: я сработал")
+
         cardFilmRepoImpl.createdCardFilm(CardFilmEntity(
             null,
             null,
             R.drawable.fox,
-            "jhjghkfjhkj",
-            "2588",
-            "dere",
-            "589"
+            "Зверополис",
+            "2018",
+            "Описание",
+            "9"
 
         ))
-
-
         cardFilmRepoImpl.createdCardFilm(cardFilm)
         cardFilmRepoImpl.createdCardFilm(cardFilm)
-        cardFilmRepoImpl.createdCardFilm(cardFilm)
-        cardFilmRepoImpl.createdCardFilm(cardFilm)
-        cardFilmRepoImpl.createdCardFilm(cardFilm)
-        cardFilmRepoImpl.createdCardFilm(cardFilm)
-
     }
 
     fun generateRepoFromWeb(kinopoiskBase: KinopoiskBase) {
-
-
         kinopoiskBase.docs.forEach{
             cardFilmRepoImpl.createdCardFilm(CardFilmEntity(
                 it.id,
@@ -61,7 +58,8 @@ class MyApp : Application() {
                 "777"
             ))
         }
-
+        Log.d(TAG, "MyApp __generateRepoFromWeb: я сработал")
+        getMyAppCardFilmRepoImpl()
 
     }
 

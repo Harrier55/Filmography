@@ -16,6 +16,7 @@ class WebConnection {
         "https://api.kinopoisk.dev/review?search=325&field=movieId&page=5&limit=10&token=68MMRD5-PBNMTR6-NREDMZQ-HDHYHYS"
     private val gson by lazy { Gson() }
     private val okHttpClient by lazy { OkHttpClient() }
+    private val viewModel = FilmListFragmentViewModel()
 
 
     fun getDataKinopoisk() {
@@ -41,9 +42,15 @@ class WebConnection {
                 val kinopoiskBase: KinopoiskBase =
                     gson.fromJson(resultJsonString, KinopoiskBase::class.java)
 
+                Log.d(TAG, "class WebConnection  onResponse: ")
+                Log.d(TAG, "class WebConnection  onResponse: вызвал  MyApp.instance.generateRepoFromWeb")
                 MyApp.instance.generateRepoFromWeb(kinopoiskBase)
 
-                Log.d(TAG, "onResponse: $resultJsonString")
+
+                Log.d(TAG, "class WebConnection  onResponse: вызвал  viewModel.getData() ")
+                Log.d(TAG, "onResponse: viewModel_hashcode= " + viewModel.hashCode())
+
+                viewModel.getData()
 
             }
 
