@@ -14,6 +14,7 @@ import android.widget.Toast
 
 import androidx.lifecycle.*
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import ru.harrier55.project.filmography.R
 
 import ru.harrier55.project.filmography.databinding.FragmentListFilmBinding
@@ -72,7 +73,12 @@ class FilmListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.errorList.observe(viewLifecycleOwner, Observer {
-            Toast.makeText(requireContext(),it, Toast.LENGTH_SHORT).show()
+            Snackbar.make(view,it,Snackbar.LENGTH_LONG)
+                .setAnchorView(R.id.bottom_navigation)
+                .setAction("Ok") {
+                    // todo
+                }
+                .show()
         })
     }
 
