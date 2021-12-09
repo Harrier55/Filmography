@@ -1,67 +1,52 @@
 package ru.harrier55.project.filmography.domain
 
-import KinopoiskBase
+
 import android.util.Log
+
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.gson.Gson
-import okhttp3.*
+
 import ru.harrier55.project.filmography.data.CardFilmEntity
 import ru.harrier55.project.filmography.data.MyApp
-import java.io.IOException
+import ru.harrier55.project.filmography.data.OnRequestCompleteListener
+import ru.harrier55.project.filmography.data.WebConnection
+
 
 class FilmListFragmentViewModel : ViewModel() {
 
     private val TAG: String = "@@@"
 
-    var TESTURL: String =
-        "https://api.kinopoisk.dev/review?search=326&field=movieId&page=5&limit=10&token=68MMRD5-PBNMTR6-NREDMZQ-HDHYHYS"
-    private val gson by lazy { Gson() }
-    private val okHttpClient by lazy { OkHttpClient() }
-
+    private val webConnection by lazy { WebConnection() }
     private var filmList: List<CardFilmEntity> = mutableListOf()
-
     val myList = MutableLiveData<List<CardFilmEntity>>()
+    val errorList = MutableLiveData<String>()
 
     init {
         Log.d(TAG, "ViewModel_ init: ")
         filmList = MyApp.instance.getMyAppCardFilmRepoImpl().getCardFilmList()
     }
 
-
     fun getData() {
-        Log.d(TAG, "  ViewModel getData  Start")
+        Log.d(TAG, "ViewModel getData  Start")
         filmList = MyApp.instance.getMyAppCardFilmRepoImpl().getCardFilmList()
         myList.postValue(filmList)
     }
 
     fun getDataKinopoisk() {
+        webConnection.getDataKinopoisk(onRequestCompleteListener)
+    }
 
-        Log.d(TAG, "  ViewModel getDataKinopoisk  Start")
-        lateinit var resultJsonString: String
-        val request = Request.Builder()
-            .url(TESTURL)
-            .build()
+    private var onRequestCompleteListener = object : OnRequestCompleteListener {
+        override fun onSuccess() {
+            Log.d(TAG, "onSuccess: start")
+            getData()
+        }
 
-        okHttpClient.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                e.printStackTrace()
-                Log.d(TAG, "onFailure: ", e)
-            }
+        override fun onError() {
+            Log.d(TAG, "onError:")
+            errorList.postValue("Отсутствует подключение к интернету")
+        }
 
-            override fun onResponse(call: Call, response: Response) {
-                if (response.code == 200) {
-                    resultJsonString = response.body!!.string()
-                }
-
-                val kinopoiskBase: KinopoiskBase =
-                    gson.fromJson(resultJsonString, KinopoiskBase::class.java)
-
-                MyApp.instance.generateRepoFromWeb(kinopoiskBase)
-
-                getData()
-            }
-        })
     }
 
 }

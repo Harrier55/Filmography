@@ -2,6 +2,7 @@ package ru.harrier55.project.filmography.ui
 
 
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 
 import androidx.lifecycle.*
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,10 +31,16 @@ class FilmListFragment : Fragment() {
     private val viewModel by lazy { ViewModelProvider(this)[FilmListFragmentViewModel::class.java] }
     private lateinit var myAdapter: NowPlayingListAdapter
 
+    private var myOnClickListener = object : MyOnClickListener {
+        override fun onClickItem() {
+            Log.d(TAG, "FilmListFragment  onClickItem:  myOnClickListener")
+            viewModel.getData()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(TAG, "onCreate: FilmListFragment")
-//        dataListFilm= MyApp.instance.getMyAppCardFilmRepoImpl().getCardFilmList()  // для тестового запуска
         if(savedInstanceState == null) {
             viewModel.getData()
             viewModel.getDataKinopoisk()
@@ -61,15 +69,16 @@ class FilmListFragment : Fragment() {
         return view
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.errorList.observe(viewLifecycleOwner, Observer {
+            Toast.makeText(requireContext(),it, Toast.LENGTH_SHORT).show()
+        })
+    }
+
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
-    }
-
-    private var myOnClickListener = object : MyOnClickListener {
-        override fun onClickItem() {
-            Log.d(TAG, "FilmListFragment  onClickItem:  myOnClickListener")
-        }
     }
 
 }

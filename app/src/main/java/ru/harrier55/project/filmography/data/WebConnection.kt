@@ -2,6 +2,7 @@ package ru.harrier55.project.filmography.data
 
 import KinopoiskBase
 import android.util.Log
+import android.view.OnReceiveContentListener
 import androidx.lifecycle.ViewModelProvider
 import com.google.gson.Gson
 import okhttp3.*
@@ -9,17 +10,21 @@ import ru.harrier55.project.filmography.R
 import ru.harrier55.project.filmography.domain.FilmListFragmentViewModel
 import java.io.IOException
 
-class WebConnection {
+
+interface OnRequestCompleteListener {
+    fun onSuccess()
+    fun onError()
+}
+
+class WebConnection() {
 
     private val TAG: String = "@@@"
     var TESTURL: String =
-        "https://api.kinopoisk.dev/review?search=325&field=movieId&page=5&limit=10&token=68MMRD5-PBNMTR6-NREDMZQ-HDHYHYS"
+        "https://api.kinopoisk.dev/review?search=326&field=movieId&page=5&limit=10&token=68MMRD5-PBNMTR6-NREDMZQ-HDHYHYS"
     private val gson by lazy { Gson() }
     private val okHttpClient by lazy { OkHttpClient() }
-    private val viewModel = FilmListFragmentViewModel()
 
-
-    fun getDataKinopoisk() {
+    fun getDataKinopoisk(onRequestCompleteListener: OnRequestCompleteListener) {
 
         lateinit var resultJsonString: String
 
@@ -31,6 +36,8 @@ class WebConnection {
             override fun onFailure(call: Call, e: IOException) {
                 e.printStackTrace()
                 Log.d(TAG, "onFailure: ", e)
+                /**Callback Error in View Model**/
+                onRequestCompleteListener.onError()
             }
 
             override fun onResponse(call: Call, response: Response) {
@@ -38,20 +45,17 @@ class WebConnection {
                 if (response.code == 200) {
                     resultJsonString = response.body!!.string()
                 }
-
+                /**Парсинг JSON в класс Кинопоиск*/
                 val kinopoiskBase: KinopoiskBase =
                     gson.fromJson(resultJsonString, KinopoiskBase::class.java)
 
-                Log.d(TAG, "class WebConnection  onResponse: ")
-                Log.d(TAG, "class WebConnection  onResponse: вызвал  MyApp.instance.generateRepoFromWeb")
+                Log.d(TAG, "WebConnection  onResponse: вызвал  MyApp.generateRepoFromWeb")
+
+                /**Заполнили репозиторий значениями из класса Кинопоиск*/
                 MyApp.instance.generateRepoFromWeb(kinopoiskBase)
 
-
-                Log.d(TAG, "class WebConnection  onResponse: вызвал  viewModel.getData() ")
-                Log.d(TAG, "onResponse: viewModel_hashcode= " + viewModel.hashCode())
-
-                viewModel.getData()
-
+                /**Callback in View Model**/
+                onRequestCompleteListener.onSuccess()
             }
 
         })
