@@ -1,4 +1,4 @@
-package ru.harrier55.project.filmography.ui
+package ru.harrier55.project.filmography.ui.filmlist
 
 import android.annotation.SuppressLint
 import android.util.Log

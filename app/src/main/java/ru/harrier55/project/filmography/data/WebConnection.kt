@@ -16,7 +16,7 @@ class WebConnection() {
 
     private val TAG: String = "@@@"
     var TESTURL: String =
-        "https://api.kinopoisk.dev/review?search=326&field=movieId&page=5&limit=10&token=68MMRD5-PBNMTR6-NREDMZQ-HDHYHYS"
+        "https://api.kinopoisk.dev/review?search=325&field=movieId&page=5&limit=10&token=68MMRD5-PBNMTR6-NREDMZQ-HDHYHYS"
     private val gson by lazy { Gson() }
     private val okHttpClient by lazy { OkHttpClient() }
 
