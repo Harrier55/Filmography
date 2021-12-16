@@ -9,7 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ru.harrier55.project.filmography.R
-import ru.harrier55.project.filmography.domain.CardFilmEntity
+import ru.harrier55.project.filmography.domain.entities.CardFilmEntity
 
 
 interface MyOnClickListener{

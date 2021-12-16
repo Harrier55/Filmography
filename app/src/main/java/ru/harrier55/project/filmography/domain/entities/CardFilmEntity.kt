@@ -1,4 +1,4 @@
-package ru.harrier55.project.filmography.domain
+package ru.harrier55.project.filmography.domain.entities
 
 
 

@@ -1,6 +1,6 @@
 package ru.harrier55.project.filmography.domain.repo
 
-import ru.harrier55.project.filmography.domain.CardFilmEntity
+import ru.harrier55.project.filmography.domain.entities.CardFilmEntity
 
 typealias CacheListFilmsListener = (listFilms: List<CardFilmEntity>) -> Unit
 

@@ -4,7 +4,7 @@ import KinopoiskBase
 import android.app.Application
 import android.util.Log
 import ru.harrier55.project.filmography.R
-import ru.harrier55.project.filmography.domain.CardFilmEntity
+import ru.harrier55.project.filmography.domain.entities.CardFilmEntity
 import ru.harrier55.project.filmography.domain.repo.CardFilmRepoImpl
 
 class MyApp : Application() {
