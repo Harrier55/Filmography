@@ -7,7 +7,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="280dp"
         android:layout_margin="8dp"
         android:elevation="8dp"
         android:backgroundTint="@color/card_film"
@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="4dp">
 
             <ImageView
                 android:id="@+id/film_poster_image_view"
@@ -34,8 +34,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:text="Название"
-                android:maxLines="1"
-                android:textSize="16sp"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:maxLines="3"
+                android:gravity="center"
                 android:clickable="true"
                 android:focusable="true" />
 
@@ -43,27 +45,24 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/film_year_premier_text_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="10sp"
+                    android:maxLines="1"
                     android:layout_weight="1"
-                    tools:text="Год выпуска" />
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:src="@drawable/ic_star"
-                     />
-
+                    tools:text="Год " />
 
                 <TextView
                     android:id="@+id/film_rating_text_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textSize="10sp"
                     android:layout_weight="1"
                     tools:text="7.0" />
 

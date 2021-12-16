@@ -1,5 +1,6 @@
-package ru.harrier55.project.filmography.ui
+package ru.harrier55.project.filmography.ui.filmlist
 
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ru.harrier55.project.filmography.R
-import ru.harrier55.project.filmography.data.CardFilm
+import ru.harrier55.project.filmography.domain.entities.CardFilmEntity
 
 
 interface MyOnClickListener{
@@ -19,15 +20,16 @@ class NowPlayingListAdapter(private var myOnClickListener: MyOnClickListener) :
     RecyclerView.Adapter<NowPlayingListAdapter.NowPlayingViewHolder>(), View.OnClickListener {
 
     private val TAG:String = "@@@"
-    private var cardFilms:List<CardFilm> = mutableListOf()
+    private var cardFilms:List<CardFilmEntity> = mutableListOf()
 
-    fun refreshListFilm(myFilm: List<CardFilm>){
+    @SuppressLint("NotifyDataSetChanged")
+    fun refreshListFilm(myFilm: List<CardFilmEntity>){
         this.cardFilms =myFilm
         notifyDataSetChanged()
     }
 
     override fun onClick(v: View?) {
-        Log.d(TAG, "onClick() адаптера ")
+        Log.d(TAG, "NowPlayingListAdapter  клик ")
         myOnClickListener.onClickItem()
     }
 
@@ -60,9 +62,6 @@ class NowPlayingListAdapter(private var myOnClickListener: MyOnClickListener) :
         val filmYearPremiere: TextView = itemView.findViewById(R.id.film_year_premier_text_view)
         val filmRating: TextView = itemView.findViewById(R.id.film_rating_text_view)
     }
-
-
-
 
 }
 

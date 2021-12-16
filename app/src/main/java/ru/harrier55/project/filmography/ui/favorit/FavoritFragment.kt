@@ -1,4 +1,4 @@
-package ru.harrier55.project.filmography.ui
+package ru.harrier55.project.filmography.ui.favorit
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
