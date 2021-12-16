@@ -1,11 +1,11 @@
-package ru.harrier55.project.filmography.domain
+package ru.harrier55.project.filmography.ui.filmlist
 
 import android.util.Log
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-import ru.harrier55.project.filmography.data.CardFilmEntity
+import ru.harrier55.project.filmography.domain.CardFilmEntity
 import ru.harrier55.project.filmography.data.MyApp
 import ru.harrier55.project.filmography.data.OnRequestCompleteListener
 import ru.harrier55.project.filmography.data.WebConnection

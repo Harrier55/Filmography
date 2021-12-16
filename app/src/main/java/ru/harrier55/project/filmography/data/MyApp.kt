@@ -4,6 +4,8 @@ import KinopoiskBase
 import android.app.Application
 import android.util.Log
 import ru.harrier55.project.filmography.R
+import ru.harrier55.project.filmography.domain.CardFilmEntity
+import ru.harrier55.project.filmography.domain.repo.CardFilmRepoImpl
 
 class MyApp : Application() {
     private val TAG:String = "@@@"
@@ -31,7 +33,8 @@ class MyApp : Application() {
 
         Log.d(TAG, "MyApp __generateRepoFromWeb: я сработал")
 
-        cardFilmRepoImpl.createdCardFilm(CardFilmEntity(
+        cardFilmRepoImpl.createdCardFilm(
+            CardFilmEntity(
             null,
             null,
             R.drawable.fox,
@@ -40,14 +43,16 @@ class MyApp : Application() {
             "Описание",
             "9"
 
-        ))
+        )
+        )
         cardFilmRepoImpl.createdCardFilm(cardFilm)
         cardFilmRepoImpl.createdCardFilm(cardFilm)
     }
 
     fun generateRepoFromWeb(kinopoiskBase: KinopoiskBase) {
         kinopoiskBase.docs.forEach{
-            cardFilmRepoImpl.createdCardFilm(CardFilmEntity(
+            cardFilmRepoImpl.createdCardFilm(
+                CardFilmEntity(
                 it.id,
                 it.movieId,
                 R.drawable.star_wars,
@@ -55,7 +60,8 @@ class MyApp : Application() {
                 it.date,
                 it.review,
                 "777"
-            ))
+            )
+            )
         }
         Log.d(TAG, "MyApp __generateRepoFromWeb: я сработал")
         getMyAppCardFilmRepoImpl()

@@ -13,7 +13,7 @@ import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import ru.harrier55.project.filmography.R
-import ru.harrier55.project.filmography.data.CardFilmEntity
+import ru.harrier55.project.filmography.domain.CardFilmEntity
 import ru.harrier55.project.filmography.data.MyApp
 import ru.harrier55.project.filmography.ui.favorit.FavoritFragment
 import ru.harrier55.project.filmography.ui.filmlist.FilmListFragment

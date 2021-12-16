@@ -15,10 +15,6 @@ import ru.harrier55.project.filmography.R
 
 import ru.harrier55.project.filmography.databinding.FragmentListFilmBinding
 
-import ru.harrier55.project.filmography.domain.FilmListFragmentViewModel
-import ru.harrier55.project.filmography.ui.filmlist.MyOnClickListener
-import ru.harrier55.project.filmography.ui.filmlist.NowPlayingListAdapter
-
 class FilmListFragment : Fragment() {
 
     private val TAG: String = "@@@"
