@@ -1,4 +1,4 @@
-package ru.harrier55.project.filmography.ui
+package ru.harrier55.project.filmography.ui.filmlist
 
 import android.os.Bundle
 import android.util.Log
@@ -16,6 +16,8 @@ import ru.harrier55.project.filmography.R
 import ru.harrier55.project.filmography.databinding.FragmentListFilmBinding
 
 import ru.harrier55.project.filmography.domain.FilmListFragmentViewModel
+import ru.harrier55.project.filmography.ui.MyOnClickListener
+import ru.harrier55.project.filmography.ui.NowPlayingListAdapter
 
 class FilmListFragment : Fragment() {
 

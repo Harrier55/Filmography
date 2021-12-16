@@ -1,4 +1,4 @@
-package ru.harrier55.project.filmography.ui
+package ru.harrier55.project.filmography.ui.rating
 
 import KinopoiskBase
 import android.os.Bundle
@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.google.gson.Gson
 import okhttp3.*
+
 import ru.harrier55.project.filmography.R
 import ru.harrier55.project.filmography.databinding.FragmentRatingsBinding
 import java.io.IOException
@@ -53,7 +54,7 @@ class RatingsFragment : Fragment() {
                 .url(TESTURL)
                 .build()
 
-            okHttpClient.newCall(request).enqueue(object : Callback{
+            okHttpClient.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
                     e.printStackTrace()
                     Log.d(TAG, "onFailure: ")
