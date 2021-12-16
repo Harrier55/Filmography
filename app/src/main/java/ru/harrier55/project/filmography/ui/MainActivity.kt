@@ -4,6 +4,8 @@ package ru.harrier55.project.filmography.ui
  *
  * */
 
+import android.content.IntentFilter
+import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -18,6 +20,7 @@ import ru.harrier55.project.filmography.data.MyApp
 import ru.harrier55.project.filmography.ui.favorit.FavoritFragment
 import ru.harrier55.project.filmography.ui.filmlist.FilmListFragment
 import ru.harrier55.project.filmography.ui.rating.RatingsFragment
+import ru.harrier55.project.filmography.ui.resievers.MyBroadcastReceiver
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,6 +43,9 @@ class MainActivity : AppCompatActivity() {
 
         initBottomNavigation()
         initFragmentManager(filmListFragment)
+
+        /**регистрация приемника**/
+        registerReceiver(MyBroadcastReceiver(), IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
 
     }
 
@@ -90,6 +96,11 @@ class MainActivity : AppCompatActivity() {
                 finish()
             }
             .show()
+    }
+
+    override fun onDestroy() {
+        unregisterReceiver(MyBroadcastReceiver())
+        super.onDestroy()
     }
 
 }
