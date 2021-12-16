@@ -2,12 +2,8 @@ package ru.harrier55.project.filmography.data
 
 import KinopoiskBase
 import android.util.Log
-import android.view.OnReceiveContentListener
-import androidx.lifecycle.ViewModelProvider
 import com.google.gson.Gson
 import okhttp3.*
-import ru.harrier55.project.filmography.R
-import ru.harrier55.project.filmography.domain.FilmListFragmentViewModel
 import java.io.IOException
 
 
@@ -36,12 +32,11 @@ class WebConnection() {
             override fun onFailure(call: Call, e: IOException) {
                 e.printStackTrace()
                 Log.d(TAG, "onFailure: ", e)
-                /**Callback Error in View Model**/
+                /**Callback Error in the View Model**/
                 onRequestCompleteListener.onError()
             }
 
             override fun onResponse(call: Call, response: Response) {
-
                 if (response.code == 200) {
                     resultJsonString = response.body!!.string()
                 }
@@ -54,7 +49,7 @@ class WebConnection() {
                 /**Заполнили репозиторий значениями из класса Кинопоиск*/
                 MyApp.instance.generateRepoFromWeb(kinopoiskBase)
 
-                /**Callback in View Model**/
+                /**Callback onResult in the View Model**/
                 onRequestCompleteListener.onSuccess()
             }
 

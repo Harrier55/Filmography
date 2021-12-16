@@ -63,9 +63,6 @@ class NowPlayingListAdapter(private var myOnClickListener: MyOnClickListener) :
         val filmRating: TextView = itemView.findViewById(R.id.film_rating_text_view)
     }
 
-
-
-
 }
 
 

@@ -1,7 +1,7 @@
 package ru.harrier55.project.filmography.data
 
 
-import com.google.gson.annotations.SerializedName
+
 import ru.harrier55.project.filmography.R
 
 data class CardFilmEntity(

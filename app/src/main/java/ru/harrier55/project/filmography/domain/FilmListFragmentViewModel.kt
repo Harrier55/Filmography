@@ -1,6 +1,5 @@
 package ru.harrier55.project.filmography.domain
 
-
 import android.util.Log
 
 import androidx.lifecycle.MutableLiveData
@@ -10,7 +9,6 @@ import ru.harrier55.project.filmography.data.CardFilmEntity
 import ru.harrier55.project.filmography.data.MyApp
 import ru.harrier55.project.filmography.data.OnRequestCompleteListener
 import ru.harrier55.project.filmography.data.WebConnection
-
 
 class FilmListFragmentViewModel : ViewModel() {
 
@@ -36,6 +34,7 @@ class FilmListFragmentViewModel : ViewModel() {
         webConnection.getDataKinopoisk(onRequestCompleteListener)
     }
 
+/** имплементация интерфейса callbabck, он сообщает,что данные с Web пришли*/
     private var onRequestCompleteListener = object : OnRequestCompleteListener {
         override fun onSuccess() {
             Log.d(TAG, "onSuccess: start")
