@@ -8,16 +8,31 @@
     tools:context=".ui.rating.RatingsFragment">
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/load_button"
-        android:layout_width="wrap_content"
+        android:id="@+id/test_logger_button"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Загрузить"/>
+        android:text="Test logger"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/read_log_file_button"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="read log File"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/delete_log_file_button"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="delete log file"/>
 
     <TextView
         android:id="@+id/load_result_TV"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"/>
 
 
 
