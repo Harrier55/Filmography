@@ -20,7 +20,7 @@ import ru.harrier55.project.filmography.data.MyApp
 import ru.harrier55.project.filmography.ui.favorit.FavoritFragment
 import ru.harrier55.project.filmography.ui.filmlist.FilmListFragment
 import ru.harrier55.project.filmography.ui.rating.RatingsFragment
-import ru.harrier55.project.filmography.ui.resievers.MyBroadcastReceiver
+import ru.harrier55.project.filmography.ui.broadcastresievers.MyBroadcastReceiver
 
 class MainActivity : AppCompatActivity() {
 

@@ -1,4 +1,4 @@
-package ru.harrier55.project.filmography.ui.resievers
+package ru.harrier55.project.filmography.ui.broadcastresievers
 
 import android.content.BroadcastReceiver
 import android.content.Context
