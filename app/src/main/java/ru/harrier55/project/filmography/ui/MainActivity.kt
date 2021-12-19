@@ -1,7 +1,7 @@
 package ru.harrier55.project.filmography.ui
 
 /**
- *
+ * lesson 6 services and Broadcastresievers is completed. PullRequest OK
  * */
 
 import android.content.IntentFilter

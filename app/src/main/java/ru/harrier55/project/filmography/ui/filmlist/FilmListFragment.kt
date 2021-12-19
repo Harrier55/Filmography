@@ -15,6 +15,7 @@ import ru.harrier55.project.filmography.R
 import ru.harrier55.project.filmography.data.OnRequestCompleteListener
 
 import ru.harrier55.project.filmography.databinding.FragmentListFilmBinding
+import ru.harrier55.project.filmography.util.MyAnalytic
 
 class FilmListFragment : Fragment(){
 
@@ -41,6 +42,7 @@ class FilmListFragment : Fragment(){
             viewModel.getData()
             viewModel.getDataKinopoisk()
         }
+        MyAnalytic.writeLogFile(requireContext(),"start FilmListFragment")
         retainInstance = true
     }
 
