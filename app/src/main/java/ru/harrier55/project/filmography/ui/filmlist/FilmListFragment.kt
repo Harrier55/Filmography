@@ -12,10 +12,12 @@ import androidx.lifecycle.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import ru.harrier55.project.filmography.R
+import ru.harrier55.project.filmography.data.OnRequestCompleteListener
 
 import ru.harrier55.project.filmography.databinding.FragmentListFilmBinding
+import ru.harrier55.project.filmography.util.MyAnalytic
 
-class FilmListFragment : Fragment() {
+class FilmListFragment : Fragment(){
 
     private val TAG: String = "@@@"
 
@@ -40,6 +42,7 @@ class FilmListFragment : Fragment() {
             viewModel.getData()
             viewModel.getDataKinopoisk()
         }
+        MyAnalytic.writeLogFile(requireContext(),"start FilmListFragment")
         retainInstance = true
     }
 
@@ -67,7 +70,9 @@ class FilmListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
          viewModel.errorList.observe(viewLifecycleOwner, Observer {
-             showMessageInSnackBar(view, it)
+             if (it != null) {
+                 showMessageInSnackBar(view, it)
+             }
         })
     }
 
@@ -76,7 +81,7 @@ class FilmListFragment : Fragment() {
         super.onDestroyView()
     }
 
-    fun showMessageInSnackBar(view: View, it:String){
+    private fun showMessageInSnackBar(view: View, it:String){
         Snackbar.make(view,it,Snackbar.LENGTH_LONG)
             .setAnchorView(R.id.bottom_navigation)
             .setAction("Ok") {
@@ -85,4 +90,4 @@ class FilmListFragment : Fragment() {
             .show()
     }
 
-}
+    }

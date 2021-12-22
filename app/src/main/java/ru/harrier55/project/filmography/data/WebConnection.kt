@@ -4,6 +4,8 @@ import KinopoiskBase
 import android.util.Log
 import com.google.gson.Gson
 import okhttp3.*
+import ru.harrier55.project.filmography.ui.MainActivity
+import ru.harrier55.project.filmography.util.MyAnalytic
 import java.io.IOException
 
 
@@ -51,7 +53,9 @@ class WebConnection() {
 
                 /**Callback onResult in the View Model**/
                 onRequestCompleteListener.onSuccess()
+
             }
+
 
         })
 

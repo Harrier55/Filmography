@@ -1,5 +1,6 @@
 package ru.harrier55.project.filmography.ui.filmlist
 
+import android.content.Context
 import android.util.Log
 
 import androidx.lifecycle.MutableLiveData
@@ -9,20 +10,22 @@ import ru.harrier55.project.filmography.domain.entities.CardFilmEntity
 import ru.harrier55.project.filmography.data.MyApp
 import ru.harrier55.project.filmography.data.OnRequestCompleteListener
 import ru.harrier55.project.filmography.data.WebConnection
+import ru.harrier55.project.filmography.util.MyAnalytic
 
-class FilmListFragmentViewModel : ViewModel() {
+class FilmListFragmentViewModel : ViewModel(){
 
     private val TAG: String = "@@@"
 
     private val webConnection by lazy { WebConnection() }
     private var filmList: List<CardFilmEntity> = mutableListOf()
     val myList = MutableLiveData<List<CardFilmEntity>>()
-    val errorList = MutableLiveData<String>()
+    val errorList = MutableLiveData<String?>()
 
     init {
         Log.d(TAG, "ViewModel_ init: ")
         filmList = MyApp.instance.getMyAppCardFilmRepoImpl().getCardFilmList()
     }
+
 
     fun getData() {
         Log.d(TAG, "ViewModel getData  Start")
@@ -38,8 +41,9 @@ class FilmListFragmentViewModel : ViewModel() {
     private var onRequestCompleteListener = object : OnRequestCompleteListener {
         override fun onSuccess() {
             Log.d(TAG, "onSuccess: start")
+            errorList.postValue(null)
             getData()
-        }
+         }
 
         override fun onError() {
             Log.d(TAG, "onError:")
@@ -47,6 +51,8 @@ class FilmListFragmentViewModel : ViewModel() {
         }
 
     }
+
+
 
 }
 
