@@ -23,8 +23,8 @@ class FilmListFragment : Fragment(){
 
     private var _binding: FragmentListFilmBinding? = null
     private val binding get() = _binding!!
-
     private val viewModel by lazy { ViewModelProvider(this)[FilmListFragmentViewModel::class.java] }
+
     private var myOnClickListener = object : MyOnClickListener {
         override fun onClickItem() {
             Log.d(TAG, "FilmListFragment  onClickItem:  myOnClickListener")
