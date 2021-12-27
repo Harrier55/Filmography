@@ -8,4 +8,6 @@ interface IFilmRepo {
     fun updateCardFilm()
     fun deleteCardFilm(cardFilm: CardFilmEntity)
 
+    fun getDataKinopoisk()
+
 }

@@ -12,7 +12,7 @@ interface OnRequestCompleteListener {
     fun onError()
 }
 
-class WebConnection() {
+class WebConnectionOkHttp() {
 
     private val TAG: String = "@@@"
     var TESTURL: String =
@@ -20,7 +20,7 @@ class WebConnection() {
     private val gson by lazy { Gson() }
     private val okHttpClient by lazy { OkHttpClient() }
 
-    fun getDataKinopoisk(onRequestCompleteListener: OnRequestCompleteListener) {
+    fun getDataKinopoiskfromOkHTTP(onRequestCompleteListener: OnRequestCompleteListener) {
 
         lateinit var resultJsonString: String
 
@@ -37,7 +37,7 @@ class WebConnection() {
             }
 
             override fun onResponse(call: Call, response: Response) {
-                if (response.code == 200) {
+                if (response.isSuccessful&&response.code == 200) {
                     resultJsonString = response.body!!.string()
                 }
                 /**Парсинг JSON в класс Кинопоиск*/
@@ -51,12 +51,10 @@ class WebConnection() {
 
                 /**Callback onResult in the View Model**/
                 onRequestCompleteListener.onSuccess()
-
             }
-
-
         })
-
     }
+
+
 
 }

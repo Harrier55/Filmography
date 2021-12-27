@@ -12,6 +12,8 @@ class MyApp : Application() {
     
     private val cardFilmRepoImpl = CardFilmRepoImpl()
 
+
+/**  Этот метод вернет мне синглтон моего репозитория   */
     fun getMyAppCardFilmRepoImpl(): CardFilmRepoImpl {
         Log.d(TAG, "My App __getMyAppCardFilmRepoImpl: в репозитоии  cardFilmRepoImpl лежат = " )
         return cardFilmRepoImpl
