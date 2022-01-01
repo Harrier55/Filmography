@@ -1,8 +1,9 @@
 package ru.harrier55.project.filmography.data
 
-import KinopoiskBase
+import KinopoiskReview
 import android.app.Application
 import android.util.Log
+import com.example.example.KinopoiskMovie
 import ru.harrier55.project.filmography.R
 import ru.harrier55.project.filmography.domain.entities.CardFilmEntity
 import ru.harrier55.project.filmography.domain.repo.CardFilmRepoImpl
@@ -51,7 +52,7 @@ class MyApp : Application() {
         cardFilmRepoImpl.createdCardFilm(cardFilm)
     }
 
-    fun generateRepoFromWeb(kinopoiskBase: KinopoiskBase) {
+    fun generateRepoFromWebReview(kinopoiskBase: KinopoiskReview) {
         kinopoiskBase.docs.forEach{
             cardFilmRepoImpl.createdCardFilm(
                 CardFilmEntity(
@@ -66,6 +67,24 @@ class MyApp : Application() {
             )
         }
         Log.d(TAG, "MyApp __generateRepoFromWeb: я сработал")
+        getMyAppCardFilmRepoImpl()
+
+    }
+
+    fun generateRepoFromWebKinopoiskMovie(kinopoiskMovie: KinopoiskMovie){
+        kinopoiskMovie.docs.forEach {
+            cardFilmRepoImpl.createdCardFilm(
+                CardFilmEntity(
+                    it.id,
+                    it.id,
+                    R.drawable.star_wars,
+                    it.alternativeName,
+                    "2020",
+                    it.description,
+                    "555"
+                )
+            )
+        }
         getMyAppCardFilmRepoImpl()
 
     }
