@@ -8,6 +8,8 @@ import android.net.NetworkInfo
 import android.widget.Toast
 import ru.harrier55.project.filmography.util.MyAnalytic
 
+/** Проверяет состояние подключения к интернету*/
+
 class MyBroadcastReceiver : BroadcastReceiver() {
 
 

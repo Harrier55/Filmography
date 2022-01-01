@@ -1,13 +1,15 @@
 package ru.harrier55.project.filmography.domain.repo
 
-import ru.harrier55.project.filmography.data.WebConnectionOkHttp
-import ru.harrier55.project.filmography.data.WebConnectionRetrofit
+import KinopoiskBase
+import android.util.Log
+import ru.harrier55.project.filmography.data.*
 import ru.harrier55.project.filmography.domain.entities.CardFilmEntity
 
 typealias CacheListFilmsListener = (listFilms: List<CardFilmEntity>) -> Unit
 
 class CardFilmRepoImpl(): IFilmRepo {
 
+    private val TAG: String = "@@@"
     private val listeners: MutableSet<CacheListFilmsListener> = mutableSetOf<CacheListFilmsListener>()
     private val cacheListFilms: ArrayList<CardFilmEntity> = ArrayList()
     private val webConnection by lazy { WebConnectionOkHttp() }
@@ -49,15 +51,10 @@ class CardFilmRepoImpl(): IFilmRepo {
         listeners.forEach { it.invoke(cacheListFilms) }
     }
 
-    override fun getDataKinopoisk() {
-
-        webConnectionRetrofit.getDataKinopoiskfromRetrofit()
-
-
-
+    override fun getDataKinopoisk(refreshRepo: OnRequestCompleteListener) {
+        webConnectionRetrofit.getDataKinopoiskfromRetrofit(refreshRepo)
 
     }
 
-
-
 }
+

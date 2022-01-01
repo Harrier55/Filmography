@@ -32,10 +32,9 @@ class FilmListFragmentViewModel : ViewModel() {
     }
 
     fun getDataKinopoisk() {
-//        webConnection.getDataKinopoiskfromOkHTTP(onRequestCompleteListener)
+//        webConnection.getDataKinopoiskfromOkHTTP(onRequestCompleteListener) // реализация для OkHTTP
 
-        MyApp.instance.getMyAppCardFilmRepoImpl().getDataKinopoisk()
-        getData()
+        MyApp.instance.getMyAppCardFilmRepoImpl().getDataKinopoisk(onRequestCompleteListener) // реализация для Retrofit
     }
 
     /** имплементация интерфейса onRequestCompleteListener, он сообщит,что данные с Web пришли, т.к запрос асинхронный*/
