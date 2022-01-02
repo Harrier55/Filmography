@@ -13,7 +13,7 @@ data class Docs (
   @SerializedName("id"               ) var id               : Int?             = null,
   @SerializedName("type"             ) var type             : String?          = null,
   @SerializedName("name"             ) var name             : String?          = null,
-  @SerializedName("description"      ) var description      : String?          = "описание",
+  @SerializedName("description"      ) var description      : String?          = null,
   @SerializedName("year"             ) var year             : Int?             = null,
   @SerializedName("alternativeName"  ) var alternativeName  : String?          = null,
   @SerializedName("enName"           ) var enName           : String?          = null,

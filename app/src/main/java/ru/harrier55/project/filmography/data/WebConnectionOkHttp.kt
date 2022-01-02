@@ -28,7 +28,7 @@ class WebConnectionOkHttp() {
                 e.printStackTrace()
                 Log.d(TAG, "onFailure: ", e)
                 /**Callback Error in the View Model**/
-//                onRequestCompleteListener.onError()
+                onRequestCompleteListener.onError()
             }
 
             override fun onResponse(call: Call, response: Response) {
@@ -39,18 +39,13 @@ class WebConnectionOkHttp() {
                 /**Парсинг JSON в класс Кинопоиск*/
                 val kinopoiskMovie:KinopoiskMovie = gson.fromJson(resultJsonString, KinopoiskMovie::class.java)
 
-//                val kinopoiskReview:KinopoiskReview = gson.fromJson(resultJsonString,KinopoiskReview::class.java)
-
-
-
                 Log.d(TAG, "WebConnectionOkHTTP  onResponse: " + kinopoiskMovie.docs[0].alternativeName)
 
                 /**Заполнили репозиторий значениями из класса Кинопоиск*/
-//                MyApp.instance.generateRepoFromWebReview(kinopoiskReview)
-                MyApp.instance.generateRepoFromWebKinopoiskMovie(kinopoiskMovie)
+//                MyApp.instance.generateRepoFromWebKinopoiskMovie(kinopoiskMovie)
 
                 /**Callback onResult in the View Model**/
-//                onRequestCompleteListener.onSuccess(kinopoiskMovie)
+                onRequestCompleteListener.onSuccessMovie(kinopoiskMovie)
             }
         })
     }

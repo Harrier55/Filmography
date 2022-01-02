@@ -1,6 +1,7 @@
 package ru.harrier55.project.filmography.ui.filmlist
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -8,23 +9,24 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import ru.harrier55.project.filmography.R
 import ru.harrier55.project.filmography.domain.entities.CardFilmEntity
 
 
-interface MyOnClickListener{
+interface MyOnClickListener {
     fun onClickItem()
 }
 
 class NowPlayingListAdapter(private var myOnClickListener: MyOnClickListener) :
     RecyclerView.Adapter<NowPlayingListAdapter.NowPlayingViewHolder>(), View.OnClickListener {
 
-    private val TAG:String = "@@@"
-    private var cardFilms:List<CardFilmEntity> = mutableListOf()
+    private val TAG: String = "@@@"
+    private var cardFilms: List<CardFilmEntity> = mutableListOf()
 
     @SuppressLint("NotifyDataSetChanged")
-    fun refreshListFilm(myFilm: List<CardFilmEntity>){
-        this.cardFilms =myFilm
+    fun refreshListFilm(myFilm: List<CardFilmEntity>) {
+        this.cardFilms = myFilm
         notifyDataSetChanged()
     }
 
@@ -46,17 +48,24 @@ class NowPlayingListAdapter(private var myOnClickListener: MyOnClickListener) :
     }
 
     private fun onBind(holder: NowPlayingViewHolder, position: Int) {
-        holder.filmPoster.setImageResource(cardFilms[position].filmPoster)
-        holder.filmName.text = cardFilms[position].filmName
-        holder.filmYearPremiere.text = cardFilms[position].filmYear_premiere
-        holder.filmRating.text = cardFilms[position].filmRating
+        Glide.with(holder.itemView.context)
+            .load(cardFilms[position].filmPoster)
+            .placeholder(R.drawable.fox)
+            .into(holder.filmPoster)
+        holder.filmName.text = (
+                (if (cardFilms[position].filmName != null) {
+                    cardFilms[position].filmName
+                } else {
+                    cardFilms[position].alternativeName
+                }).toString())
+        holder.filmYearPremiere.text = cardFilms[position].filmYear_premiere.toString()
+        holder.filmRating.text = cardFilms[position].filmRating.toString()
 
         holder.filmPoster.setOnClickListener(this)
         holder.filmName.setOnClickListener(this)
     }
 
     class NowPlayingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
         val filmPoster: ImageView = itemView.findViewById(R.id.film_poster_image_view)
         val filmName: TextView = itemView.findViewById(R.id.film_name_text_view)
         val filmYearPremiere: TextView = itemView.findViewById(R.id.film_year_premier_text_view)

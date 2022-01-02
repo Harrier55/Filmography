@@ -50,8 +50,8 @@ class CardFilmRepoImpl(): IFilmRepo {
     }
 
     override fun getDataKinopoisk(onRequestCompleteListener: OnRequestCompleteListener) {
-//        webConnectionRetrofit.getDataKinopoiskReviewfromRetrofit(onRequestCompleteListener)  // реализация для Retrofit
-        webConnectionOkHttp.getDataKinopoiskfromOkHTTP(onRequestCompleteListener)  // реализация для OkHTTP
+        webConnectionRetrofit.getDataKinopoiskReviewfromRetrofit(onRequestCompleteListener)  // реализация для Retrofit
+//        webConnectionOkHttp.getDataKinopoiskfromOkHTTP(onRequestCompleteListener)  // реализация для OkHTTP
 
     }
 

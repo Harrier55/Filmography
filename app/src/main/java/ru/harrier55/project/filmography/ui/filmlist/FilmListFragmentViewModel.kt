@@ -5,6 +5,7 @@ import android.util.Log
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.example.KinopoiskMovie
 
 import ru.harrier55.project.filmography.domain.entities.CardFilmEntity
 import ru.harrier55.project.filmography.data.MyApp
@@ -36,11 +37,18 @@ class FilmListFragmentViewModel : ViewModel() {
 
     /** имплементация интерфейса onRequestCompleteListener, он сообщит,что данные с Web пришли, т.к запрос асинхронный*/
     private var onRequestCompleteListener = object : OnRequestCompleteListener {
-        override fun onSuccess(kinopoiskReview: KinopoiskReview) {
+        override fun onSuccessReview(kinopoiskReview: KinopoiskReview) {
             Log.d(TAG, "onSuccess: start")
             errorList.postValue(null)
-    /**заполняем репозиторий значениями из Web**/
+            /**заполняем репозиторий значениями из Web**/
             MyApp.instance.generateRepoFromWebReview(kinopoiskReview)
+            getData()
+        }
+
+        override fun onSuccessMovie(kinopoiskMovie: KinopoiskMovie) {
+            errorList.postValue(null)
+             /**заполняем репозиторий значениями из Web**/
+            MyApp.instance.generateRepoFromWebKinopoiskMovie(kinopoiskMovie)
             getData()
         }
 

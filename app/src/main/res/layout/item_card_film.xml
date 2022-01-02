@@ -8,7 +8,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="280dp"
-        android:layout_margin="8dp"
+        android:layout_margin="4dp"
         android:elevation="8dp"
         android:backgroundTint="@color/card_film"
         android:background="@android:drawable/list_selector_background"
@@ -20,20 +20,21 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="4dp">
+            android:padding="2dp">
 
             <ImageView
                 android:id="@+id/film_poster_image_view"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:clickable="true"
-
+                tools:src="@drawable/star_wars"
                 />
             <TextView
                 android:id="@+id/film_name_text_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 tools:text="Название"
+                android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:maxLines="3"
@@ -41,29 +42,56 @@
                 android:clickable="true"
                 android:focusable="true" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Премьера"
+                    android:textSize="10sp"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Рейтинг"
+                    android:textSize="10sp"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:gravity="center"/>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="bottom">
 
                 <TextView
                     android:id="@+id/film_year_premier_text_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="10sp"
-                    android:maxLines="1"
                     android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="@color/black"
                     tools:text="Год " />
 
                 <TextView
                     android:id="@+id/film_rating_text_view"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textSize="10sp"
                     android:layout_weight="1"
+                    android:textColor="@color/black"
                     tools:text="7.0" />
 
             </LinearLayout>
