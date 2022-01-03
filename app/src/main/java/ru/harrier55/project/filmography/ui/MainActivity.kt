@@ -3,6 +3,7 @@ package ru.harrier55.project.filmography.ui
 /**
  * lesson 6 services and Broadcastresievers is completed. PullRequest OK
  * lesson 7 Retrofit and Glide is completed. PullRequest OK
+ * lesson 8 ...
  * */
 
 import android.content.IntentFilter
