@@ -1,19 +1,22 @@
 package ru.harrier55.project.filmography.data
 
-import KinopoiskBase
+import KinopoiskReview
 import android.app.Application
 import android.util.Log
+import com.example.example.KinopoiskMovie
 import ru.harrier55.project.filmography.R
 import ru.harrier55.project.filmography.domain.entities.CardFilmEntity
 import ru.harrier55.project.filmography.domain.repo.CardFilmRepoImpl
 
 class MyApp : Application() {
-    private val TAG:String = "@@@"
-    
+    private val TAG: String = "@@@"
+
     private val cardFilmRepoImpl = CardFilmRepoImpl()
 
+
+    /**  Этот метод вернет мне синглтон моего репозитория   */
     fun getMyAppCardFilmRepoImpl(): CardFilmRepoImpl {
-        Log.d(TAG, "My App __getMyAppCardFilmRepoImpl: в репозитоии  cardFilmRepoImpl лежат = " )
+        Log.d(TAG, "My App __getMyAppCardFilmRepoImpl: в репозитоии  cardFilmRepoImpl лежат = ")
         return cardFilmRepoImpl
     }
 
@@ -35,35 +38,53 @@ class MyApp : Application() {
 
         cardFilmRepoImpl.createdCardFilm(
             CardFilmEntity(
-            null,
-            null,
-            R.drawable.fox,
-            "Зверополис",
-            "2018",
-            "Описание",
-            "9"
+                null,
+                null,
+                null,
+                "Зверополис",
+                2018,
+                "Описание",
+                9.8
 
+            )
         )
-        )
-        cardFilmRepoImpl.createdCardFilm(cardFilm)
-        cardFilmRepoImpl.createdCardFilm(cardFilm)
+//        cardFilmRepoImpl.createdCardFilm(cardFilm)
+//        cardFilmRepoImpl.createdCardFilm(cardFilm)
     }
 
-    fun generateRepoFromWeb(kinopoiskBase: KinopoiskBase) {
-        kinopoiskBase.docs.forEach{
+    fun generateRepoFromWebReview(kinopoiskBase: KinopoiskReview) {
+        kinopoiskBase.docs.forEach {
             cardFilmRepoImpl.createdCardFilm(
                 CardFilmEntity(
-                it.id,
-                it.movieId,
-                R.drawable.star_wars,
-                it.title,
-                it.date,
-                it.review,
-                "777"
-            )
+                    it.id,
+                    it.movieId,
+                    null,
+                    it.title,
+                    2018,
+                    it.review,
+                    5.9
+                )
             )
         }
-        Log.d(TAG, "MyApp __generateRepoFromWeb: я сработал")
+        getMyAppCardFilmRepoImpl()
+
+    }
+
+    fun generateRepoFromWebKinopoiskMovie(kinopoiskMovie: KinopoiskMovie) {
+        kinopoiskMovie.docs.forEach {
+            cardFilmRepoImpl.createdCardFilm(
+                CardFilmEntity(
+                    it.id,
+                    it.id,
+                    it.poster?.previewUrl,
+                    it.name,
+                    it.year,
+                    it.description,
+                    it.rating?.imdb,
+                    it.alternativeName
+                )
+            )
+        }
         getMyAppCardFilmRepoImpl()
 
     }

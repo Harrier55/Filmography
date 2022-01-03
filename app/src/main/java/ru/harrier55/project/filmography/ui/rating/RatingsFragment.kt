@@ -1,21 +1,15 @@
 package ru.harrier55.project.filmography.ui.rating
 
-import KinopoiskBase
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import com.google.gson.Gson
-import okhttp3.*
 
 import ru.harrier55.project.filmography.R
 import ru.harrier55.project.filmography.databinding.FragmentRatingsBinding
 import ru.harrier55.project.filmography.util.MyAnalytic
 import java.io.File
-import java.io.IOException
 import java.lang.Exception
 
 

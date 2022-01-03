@@ -1,22 +1,20 @@
 package ru.harrier55.project.filmography.ui.filmlist
 
-import android.content.Context
+import KinopoiskReview
 import android.util.Log
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.example.KinopoiskMovie
 
 import ru.harrier55.project.filmography.domain.entities.CardFilmEntity
 import ru.harrier55.project.filmography.data.MyApp
 import ru.harrier55.project.filmography.data.OnRequestCompleteListener
-import ru.harrier55.project.filmography.data.WebConnection
-import ru.harrier55.project.filmography.util.MyAnalytic
 
-class FilmListFragmentViewModel : ViewModel(){
+class FilmListFragmentViewModel : ViewModel() {
 
     private val TAG: String = "@@@"
 
-    private val webConnection by lazy { WebConnection() }
     private var filmList: List<CardFilmEntity> = mutableListOf()
     val myList = MutableLiveData<List<CardFilmEntity>>()
     val errorList = MutableLiveData<String?>()
@@ -26,32 +24,39 @@ class FilmListFragmentViewModel : ViewModel(){
         filmList = MyApp.instance.getMyAppCardFilmRepoImpl().getCardFilmList()
     }
 
-
+    /** Обновление данных*/
     fun getData() {
         Log.d(TAG, "ViewModel getData  Start")
         filmList = MyApp.instance.getMyAppCardFilmRepoImpl().getCardFilmList()
         myList.postValue(filmList)
     }
-
+    /** Запрос : Репозиторий,дай данные из Кинопоиска*/
     fun getDataKinopoisk() {
-        webConnection.getDataKinopoisk(onRequestCompleteListener)
+        MyApp.instance.getMyAppCardFilmRepoImpl().getDataKinopoisk(onRequestCompleteListener)
     }
 
-/** имплементация интерфейса callbabck, он сообщает,что данные с Web пришли*/
+    /** имплементация интерфейса onRequestCompleteListener, он сообщит,что данные с Web пришли, т.к запрос асинхронный*/
     private var onRequestCompleteListener = object : OnRequestCompleteListener {
-        override fun onSuccess() {
+        override fun onSuccessReview(kinopoiskReview: KinopoiskReview) {
             Log.d(TAG, "onSuccess: start")
             errorList.postValue(null)
+            /**заполняем репозиторий значениями из Web**/
+            MyApp.instance.generateRepoFromWebReview(kinopoiskReview)
             getData()
-         }
+        }
+
+        override fun onSuccessMovie(kinopoiskMovie: KinopoiskMovie) {
+            errorList.postValue(null)
+             /**заполняем репозиторий значениями из Web**/
+            MyApp.instance.generateRepoFromWebKinopoiskMovie(kinopoiskMovie)
+            getData()
+        }
 
         override fun onError() {
             Log.d(TAG, "onError:")
             errorList.postValue("Отсутствует подключение к интернету")
         }
-
     }
-
 
 
 }

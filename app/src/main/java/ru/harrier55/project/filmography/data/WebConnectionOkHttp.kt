@@ -1,33 +1,26 @@
 package ru.harrier55.project.filmography.data
 
-import KinopoiskBase
 import android.util.Log
+import com.example.example.KinopoiskMovie
 import com.google.gson.Gson
 import okhttp3.*
-import ru.harrier55.project.filmography.ui.MainActivity
-import ru.harrier55.project.filmography.util.MyAnalytic
 import java.io.IOException
 
-
-interface OnRequestCompleteListener {
-    fun onSuccess()
-    fun onError()
-}
-
-class WebConnection() {
+class WebConnectionOkHttp() {
 
     private val TAG: String = "@@@"
-    var TESTURL: String =
-        "https://api.kinopoisk.dev/review?search=325&field=movieId&page=5&limit=10&token=68MMRD5-PBNMTR6-NREDMZQ-HDHYHYS"
+    var movieUrl: String =
+        "https://api.kinopoisk.dev/movie?search=2019&field=year&limit=10&token=68MMRD5-PBNMTR6-NREDMZQ-HDHYHYS"
+    val reviewUrl:String = "https://api.kinopoisk.dev/review?search=325&field=movieId&page=10&limit=10&token=68MMRD5-PBNMTR6-NREDMZQ-HDHYHYS"
     private val gson by lazy { Gson() }
     private val okHttpClient by lazy { OkHttpClient() }
 
-    fun getDataKinopoisk(onRequestCompleteListener: OnRequestCompleteListener) {
+    fun getDataKinopoiskfromOkHTTP(onRequestCompleteListener: OnRequestCompleteListener) {
 
         lateinit var resultJsonString: String
 
         val request = Request.Builder()
-            .url(TESTURL)
+            .url(movieUrl)
             .build()
 
         okHttpClient.newCall(request).enqueue(object : Callback {
@@ -39,26 +32,24 @@ class WebConnection() {
             }
 
             override fun onResponse(call: Call, response: Response) {
-                if (response.code == 200) {
+                if (response.isSuccessful&&response.code == 200) {
                     resultJsonString = response.body!!.string()
                 }
-                /**Парсинг JSON в класс Кинопоиск*/
-                val kinopoiskBase: KinopoiskBase =
-                    gson.fromJson(resultJsonString, KinopoiskBase::class.java)
 
-                Log.d(TAG, "WebConnection  onResponse: вызвал  MyApp.generateRepoFromWeb")
+                /**Парсинг JSON в класс Кинопоиск*/
+                val kinopoiskMovie:KinopoiskMovie = gson.fromJson(resultJsonString, KinopoiskMovie::class.java)
+
+                Log.d(TAG, "WebConnectionOkHTTP  onResponse: " + kinopoiskMovie.docs[0].alternativeName)
 
                 /**Заполнили репозиторий значениями из класса Кинопоиск*/
-                MyApp.instance.generateRepoFromWeb(kinopoiskBase)
+//                MyApp.instance.generateRepoFromWebKinopoiskMovie(kinopoiskMovie)
 
                 /**Callback onResult in the View Model**/
-                onRequestCompleteListener.onSuccess()
-
+                onRequestCompleteListener.onSuccessMovie(kinopoiskMovie)
             }
-
-
         })
-
     }
+
+
 
 }

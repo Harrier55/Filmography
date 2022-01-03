@@ -7,11 +7,13 @@ import ru.harrier55.project.filmography.R
 data class CardFilmEntity(
     val id: Int? = null,
     val movieId: Int? = null,
-    var filmPoster: Int = R.drawable.star_wars,
-    var filmName: String? = "Название фильма",
-    var filmYear_premiere: String? = "дата премьеры",
+    val filmPoster: String? = null,
+    val filmName: String? = "Название фильма - test",
+    val filmYear_premiere: Int? = 2002,
     val description: String? = "описание",
-    var filmRating: String? = "рейтинг"
+    val filmRating: Double? = 5.5,
+    val alternativeName:String? = null
+
 ) {
 
 
