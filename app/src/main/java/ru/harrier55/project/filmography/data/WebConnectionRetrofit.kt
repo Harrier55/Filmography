@@ -17,7 +17,7 @@ import retrofit2.http.GET
 //}
 
 interface RetrofitServiceMovie{
-    @GET("movie?search=2020&field=year&limit=10&token=68MMRD5-PBNMTR6-NREDMZQ-HDHYHYS")
+    @GET("movie?search=2021&field=year&limit=10&token=68MMRD5-PBNMTR6-NREDMZQ-HDHYHYS")
     fun getFilmListMovie(): Call<KinopoiskMovie>
 }
 
