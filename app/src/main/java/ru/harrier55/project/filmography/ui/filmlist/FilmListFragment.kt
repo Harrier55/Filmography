@@ -75,7 +75,7 @@ class FilmListFragment : Fragment() {
     /**инициализируем интерфейс*/
     private var onClickListenerCardFilm = object : OnClickListenerCardFilm {
         override fun onClickItemCardFilm(cardFilmEntity: CardFilmEntity) {
-            Log.d(TAG, "FilmListFragment  onClickItemCardFilm:  myOnClickListener + " + cardFilmEntity.description)
+            Log.d(TAG, "FilmListFragment  onClickItemCardFilm:  myOnClickListener + " + cardFilmEntity.idKp.toString())
             /**вызвал этот метод как резервное решение для обновления viewModel*/
             viewModel.getData()
 

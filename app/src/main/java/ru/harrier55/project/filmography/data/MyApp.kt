@@ -74,7 +74,7 @@ class MyApp : Application() {
         kinopoiskMovie.docs.forEach {
             cardFilmRepoImpl.createdCardFilm(
                 CardFilmEntity(
-                    it.id,
+                    null,
                     it.id,
                     it.poster?.previewUrl,
                     it.name,
