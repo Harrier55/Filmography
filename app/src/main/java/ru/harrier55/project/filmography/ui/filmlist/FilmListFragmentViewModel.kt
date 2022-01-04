@@ -35,7 +35,7 @@ class FilmListFragmentViewModel : ViewModel() {
         MyApp.instance.getMyAppCardFilmRepoImpl().getDataKinopoisk(onRequestCompleteListener)
     }
 
-    /** имплементация интерфейса onRequestCompleteListener, он сообщит,что данные с Web пришли, т.к запрос асинхронный*/
+    /** инициализация интерфейса onRequestCompleteListener, он сообщит,что данные с Web пришли, т.к запрос асинхронный*/
     private var onRequestCompleteListener = object : OnRequestCompleteListener {
         override fun onSuccessReview(kinopoiskReview: KinopoiskReview) {
             Log.d(TAG, "onSuccess: start")

@@ -12,37 +12,28 @@ import androidx.lifecycle.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import ru.harrier55.project.filmography.R
-import ru.harrier55.project.filmography.data.OnRequestCompleteListener
 
 import ru.harrier55.project.filmography.databinding.FragmentListFilmBinding
+import ru.harrier55.project.filmography.domain.entities.CardFilmEntity
 import ru.harrier55.project.filmography.util.MyAnalytic
 
-class FilmListFragment : Fragment(){
+class FilmListFragment : Fragment() {
 
     private val TAG: String = "@@@"
 
     private var _binding: FragmentListFilmBinding? = null
     private val binding get() = _binding!!
     private val viewModel by lazy { ViewModelProvider(this)[FilmListFragmentViewModel::class.java] }
-
-    private var myOnClickListener = object : MyOnClickListener {
-        override fun onClickItem() {
-            Log.d(TAG, "FilmListFragment  onClickItem:  myOnClickListener")
-            viewModel.getData()
-        }
-    }
-    private val myAdapter by lazy { NowPlayingListAdapter(myOnClickListener) }
-
-
+    private val myAdapter by lazy { NowPlayingListAdapter(onClickListenerCardFilm) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(TAG, "onCreate: FilmListFragment")
-        if(savedInstanceState == null) {
+        if (savedInstanceState == null) {
             viewModel.getData()
             viewModel.getDataKinopoisk()
         }
-        MyAnalytic.writeLogFile(requireContext(),"start FilmListFragment")
+        MyAnalytic.writeLogFile(requireContext(), "start FilmListFragment")
         retainInstance = true
     }
 
@@ -69,10 +60,10 @@ class FilmListFragment : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-         viewModel.errorList.observe(viewLifecycleOwner, Observer {
-             if (it != null) {
-                 showMessageInSnackBar(view, it)
-             }
+        viewModel.errorList.observe(viewLifecycleOwner, Observer {
+            if (it != null) {
+                showMessageInSnackBar(view, it)
+            }
         })
     }
 
@@ -81,13 +72,23 @@ class FilmListFragment : Fragment(){
         super.onDestroyView()
     }
 
-    private fun showMessageInSnackBar(view: View, it:String){
-        Snackbar.make(view,it,Snackbar.LENGTH_LONG)
+    /**инициализируем интерфейс*/
+    private var onClickListenerCardFilm = object : OnClickListenerCardFilm {
+        override fun onClickItemCardFilm(cardFilmEntity: CardFilmEntity) {
+            Log.d(TAG, "FilmListFragment  onClickItemCardFilm:  myOnClickListener + " + cardFilmEntity.description)
+            /**вызвал этот метод как резервное решение для обновления viewModel*/
+            viewModel.getData()
+
+        }
+    }
+
+    private fun showMessageInSnackBar(view: View, it: String) {
+        Snackbar.make(view, it, Snackbar.LENGTH_LONG)
             .setAnchorView(R.id.bottom_navigation)
             .setAction("Ok") {
-                // todo
+                // todo возможное действие для кнопки ОК
             }
             .show()
     }
 
-    }
+}

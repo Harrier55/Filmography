@@ -12,13 +12,8 @@ import com.bumptech.glide.Glide
 import ru.harrier55.project.filmography.R
 import ru.harrier55.project.filmography.domain.entities.CardFilmEntity
 
-
-interface MyOnClickListener {
-    fun onClickItem()
-}
-
-class NowPlayingListAdapter(private var myOnClickListener: MyOnClickListener) :
-    RecyclerView.Adapter<NowPlayingListAdapter.NowPlayingViewHolder>(), View.OnClickListener {
+class NowPlayingListAdapter(private var onClickListenerCardFilm: OnClickListenerCardFilm) :
+    RecyclerView.Adapter<NowPlayingListAdapter.NowPlayingViewHolder>() {
 
     private val TAG: String = "@@@"
     private var cardFilms: List<CardFilmEntity> = mutableListOf()
@@ -27,11 +22,6 @@ class NowPlayingListAdapter(private var myOnClickListener: MyOnClickListener) :
     fun refreshListFilm(myFilm: List<CardFilmEntity>) {
         this.cardFilms = myFilm
         notifyDataSetChanged()
-    }
-
-    override fun onClick(v: View?) {
-        Log.d(TAG, "NowPlayingListAdapter  клик ")
-        myOnClickListener.onClickItem()
     }
 
     override fun getItemCount(): Int = cardFilms.size
@@ -47,6 +37,8 @@ class NowPlayingListAdapter(private var myOnClickListener: MyOnClickListener) :
     }
 
     private fun onBind(holder: NowPlayingViewHolder, position: Int) {
+        val cardFilmEntity:CardFilmEntity = cardFilms[position]
+
         Glide.with(holder.itemView.context)
             .load(cardFilms[position].filmPoster)
             .placeholder(R.drawable.fox)
@@ -60,8 +52,10 @@ class NowPlayingListAdapter(private var myOnClickListener: MyOnClickListener) :
         holder.filmYearPremiere.text = cardFilms[position].filmYear_premiere.toString()
         holder.filmRating.text = cardFilms[position].filmRating.toString()
 
-        holder.filmPoster.setOnClickListener(this)
-        holder.filmName.setOnClickListener(this)
+        holder.itemView.setOnClickListener {
+            Log.d(TAG, "NowPlayingListAdapter onBind: "+ cardFilmEntity.filmName)
+            onClickListenerCardFilm.onClickItemCardFilm(cardFilmEntity)
+        }
     }
 
     class NowPlayingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
