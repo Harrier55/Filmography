@@ -3,6 +3,7 @@ package ru.harrier55.project.filmography.domain.repo
 import android.util.Log
 import ru.harrier55.project.filmography.data.MyApp
 import ru.harrier55.project.filmography.data.room.CardFilmEntityFavoriteDb
+import ru.harrier55.project.filmography.domain.entities.CardFilmEntity
 import ru.harrier55.project.filmography.ui.favorit.OnRequestCompleteDataBaseListener
 
 class CardFilmRepoFavoriteDataBaseImpl : IFilmRepoDb {
@@ -14,23 +15,20 @@ class CardFilmRepoFavoriteDataBaseImpl : IFilmRepoDb {
 
 
     /**  в этот метод приходит CardFilmEntity и затем преобразовавается в формат для бвзы данных
-     * это разные объекты*/
-    override fun createdCardFilm() {
+     * так как это разные объекты*/
+    override fun createdCardFilm(cardFilmEntity: CardFilmEntity) {
 
-        /** TEST  */
+
         Thread {
-            favoriteDataBase.insertCardFilmEntity(
-                CardFilmEntityFavoriteDb(
-                    null,
-                    12345,
-                    "poster",
-                    "Name",
-                    2025,
-                    "deskriptions",
-                    2.1,
-                    "alternative"
-                )
-            )
+                favoriteDataBase.insertCardFilmEntity(CardFilmEntityFavoriteDb(null,
+                cardFilmEntity.idKp,
+                cardFilmEntity.filmPoster,
+                cardFilmEntity.filmName,
+                cardFilmEntity.filmYear_premiere,
+                cardFilmEntity.description,
+                cardFilmEntity.filmRating,
+                cardFilmEntity.alternativeName))
+
         }.start()
     }
 

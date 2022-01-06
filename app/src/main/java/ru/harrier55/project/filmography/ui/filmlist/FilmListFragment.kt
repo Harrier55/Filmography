@@ -72,11 +72,15 @@ class FilmListFragment : Fragment() {
         super.onDestroyView()
     }
 
-    /**инициализируем интерфейс*/
+    /**инициализируем интерфейс слушателя клика на карточку фильма*/
     private var onClickListenerCardFilm = object : OnClickListenerCardFilm {
         override fun onClickItemCardFilm(cardFilmEntity: CardFilmEntity) {
             Log.d(TAG, "FilmListFragment  onClickItemCardFilm:  myOnClickListener + " + cardFilmEntity.idKp.toString())
-            /**вызвал этот метод как резервное решение для обновления viewModel*/
+
+            viewModel.addCardFilmToFavoriteFragment(cardFilmEntity)
+
+
+            /**вызвал этот метод getData() как резервное решение для обновления viewModel*/
             viewModel.getData()
 
         }

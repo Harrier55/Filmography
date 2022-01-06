@@ -10,7 +10,7 @@ data class CardFilmEntityFavoriteDb(
     @ColumnInfo(name = "id")
     val id: Int? = null,
     @ColumnInfo(name = "id_kinopoisk")
-    val idKp: Long? = null,
+    val idKp: Int? = null,
     @ColumnInfo(name = "poster")
     val filmPoster: String? = null,
     @ColumnInfo(name = "film_name")
