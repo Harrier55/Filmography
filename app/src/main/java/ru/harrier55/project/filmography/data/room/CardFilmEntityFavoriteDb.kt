@@ -7,7 +7,8 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "favorite_films")
 data class CardFilmEntityFavoriteDb(
     @PrimaryKey(autoGenerate = true)
-    val id: Long? = null,
+    @ColumnInfo(name = "id")
+    val id: Int? = null,
     @ColumnInfo(name = "id_kinopoisk")
     val idKp: Long? = null,
     @ColumnInfo(name = "poster")

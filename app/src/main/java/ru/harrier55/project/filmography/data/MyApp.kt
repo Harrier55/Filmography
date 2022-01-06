@@ -22,7 +22,6 @@ class MyApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        Log.d(TAG, "override fun onCreate in MyApp: ")
         instance = this
     }
 

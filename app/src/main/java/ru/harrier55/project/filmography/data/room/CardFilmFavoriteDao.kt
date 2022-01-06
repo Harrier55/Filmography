@@ -8,11 +8,13 @@ import androidx.room.Query
 import ru.harrier55.project.filmography.domain.entities.CardFilmEntity
 
 @Dao
-interface CardFilmEntityFavoriteDao {
+interface CardFilmFavoriteDao {
     @Query("SELECT*FROM favorite_films")
-    fun getListCardFilmEntityFavorite(): LiveData<MutableList<CardFilmEntityFavoriteDb>>
+    fun getListCardFilmEntityFavorite(): List<CardFilmEntityFavoriteDb>
     @Insert
     fun insertCardFilmEntity(cardFilmEntity: CardFilmEntity)
     @Delete
     fun deleteCardFilmEntity(cardFilmEntityFavoriteDb: CardFilmEntityFavoriteDb)
+    @Query("DELETE FROM favorite_films" )
+    fun deleteTable()
 }
