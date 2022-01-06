@@ -3,8 +3,10 @@ package ru.harrier55.project.filmography.data
 import KinopoiskReview
 import android.app.Application
 import android.util.Log
+import androidx.room.Room
 import com.example.example.KinopoiskMovie
-import ru.harrier55.project.filmography.R
+import ru.harrier55.project.filmography.data.room.CardFilmFavoriteDao
+import ru.harrier55.project.filmography.data.room.FavoriteDataBase
 import ru.harrier55.project.filmography.domain.entities.CardFilmEntity
 import ru.harrier55.project.filmography.domain.repo.CardFilmRepoImpl
 
@@ -85,7 +87,15 @@ class MyApp : Application() {
             )
         }
         getMyAppCardFilmRepoImpl()
+    }
 
+    fun getFavoriteDataBaseDao(): CardFilmFavoriteDao {
+        return Room.databaseBuilder(
+            this,
+            FavoriteDataBase::class.java,
+            "favorite_films_db"
+        ).build()
+            .cardFilmEntityFavoriteDao()
     }
 
 }

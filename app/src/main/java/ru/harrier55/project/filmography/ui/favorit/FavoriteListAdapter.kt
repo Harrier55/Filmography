@@ -13,9 +13,14 @@ import ru.harrier55.project.filmography.data.room.CardFilmEntityFavoriteDb
 class FavoriteListAdapter() : RecyclerView.Adapter<FavoriteListAdapter.FavoriteViewHolder>() {
 
     private val TAG: String = "@@@"
-//    private var cardFilmsDb: List<CardFilmEntityFavoriteDb> = mutableListOf()
+    private var cardFilmsDb: List<CardFilmEntityFavoriteDb> = mutableListOf()
 
-    override fun getItemCount(): Int = 10
+    fun refreshList(myFilms: List<CardFilmEntityFavoriteDb>){
+        this.cardFilmsDb = myFilms
+        notifyDataSetChanged()
+    }
+
+    override fun getItemCount(): Int = cardFilmsDb.size
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
@@ -25,15 +30,15 @@ class FavoriteListAdapter() : RecyclerView.Adapter<FavoriteListAdapter.FavoriteV
     }
 
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
-//        holder.favoriteFilmPoster.text = cardFilmsDb[position].filmPoster
-//        holder.favoriteFilmName.text = cardFilmsDb[position].filmName
-//        holder.favoriteAlternativeName.text = cardFilmsDb[position].alternativeName
-//        holder.favoriteDescription.text = cardFilmsDb[position].description
+        holder.favoriteFilmPoster.text = cardFilmsDb[position].filmPoster
+        holder.favoriteFilmName.text = cardFilmsDb[position].filmName
+        holder.favoriteAlternativeName.text = cardFilmsDb[position].alternativeName
+        holder.favoriteDescription.text = cardFilmsDb[position].description
 
-        holder.favoriteFilmPoster.text =" cardFilmsDb[position].filmPoster"
-        holder.favoriteFilmName.text = "cardFilmsDb[position].filmName"
-        holder.favoriteAlternativeName.text = "cardFilmsDb[position].alternativeName"
-        holder.favoriteDescription.text = "cardFilmsDb[position].description"
+//        holder.favoriteFilmPoster.text =" cardFilmsDb[position].filmPoster"
+//        holder.favoriteFilmName.text = "cardFilmsDb[position].filmName"
+//        holder.favoriteAlternativeName.text = "cardFilmsDb[position].alternativeName"
+//        holder.favoriteDescription.text = "cardFilmsDb[position].description"
     }
 
 

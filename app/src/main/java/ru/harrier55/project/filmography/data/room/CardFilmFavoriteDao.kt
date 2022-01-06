@@ -12,7 +12,7 @@ interface CardFilmFavoriteDao {
     @Query("SELECT*FROM favorite_films")
     fun getListCardFilmEntityFavorite(): List<CardFilmEntityFavoriteDb>
     @Insert
-    fun insertCardFilmEntity(cardFilmEntity: CardFilmEntity)
+    fun insertCardFilmEntity(cardFilmEntityFavoriteDb: CardFilmEntityFavoriteDb)
     @Delete
     fun deleteCardFilmEntity(cardFilmEntityFavoriteDb: CardFilmEntityFavoriteDb)
     @Query("DELETE FROM favorite_films" )

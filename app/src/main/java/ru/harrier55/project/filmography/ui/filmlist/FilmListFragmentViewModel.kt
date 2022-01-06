@@ -19,6 +19,7 @@ class FilmListFragmentViewModel : ViewModel() {
     val myList = MutableLiveData<List<CardFilmEntity>>()
     val errorList = MutableLiveData<String?>()
 
+
     init {
         Log.d(TAG, "ViewModel_ init: ")
         filmList = MyApp.instance.getMyAppCardFilmRepoImpl().getCardFilmList()
