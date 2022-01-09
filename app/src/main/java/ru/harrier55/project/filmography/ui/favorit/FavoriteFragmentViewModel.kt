@@ -7,7 +7,6 @@ import ru.harrier55.project.filmography.domain.repo.CardFilmRepoFavoriteDataBase
 
 class FavoriteFragmentViewModel: ViewModel() {
 
-    private val filmList: List<CardFilmEntityFavoriteDb> = mutableListOf()
     private val cardFilmRepoDb by lazy { CardFilmRepoFavoriteDataBaseImpl() }
     var myListFavoriteFilm = MutableLiveData<List<CardFilmEntityFavoriteDb>>()
 
@@ -23,8 +22,8 @@ class FavoriteFragmentViewModel: ViewModel() {
     /** инициализация интерфейса onRequestCompleteDataBaseListener, он сообщит,
      * что данные с Data Base пришли, т.к запрос асинхронный*/
     private val onRequestCompleteDataBaseListener = object: OnRequestCompleteDataBaseListener{
-        override fun getDataFromDb(cardFilms: List<CardFilmEntityFavoriteDb>) {
-            myListFavoriteFilm.postValue(cardFilms)
+        override fun getDataFromDb(myList: List<CardFilmEntityFavoriteDb>) {
+            myListFavoriteFilm.postValue(myList)
         }
     }
 }

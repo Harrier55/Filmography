@@ -25,7 +25,7 @@ class FavoriteFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
- //      cardFilmRepo.createdCardFilm()  // для создания одной записи в БД
+        //      cardFilmRepo.createdCardFilm()  // для создания одной записи в БД
 
         viewModel.getData()
     }
@@ -47,18 +47,17 @@ class FavoriteFragment : Fragment() {
         return view
     }
 
-    private val onClickItemFavoriteFragment = object : OnClickItemFavoriteFragment{
+    /**Инициализация интерфейса слушателя */
+    private val onClickItemFavoriteFragment = object : OnClickItemFavoriteFragment {
         override fun onClickDeleteButton(cardFilmEntityFavoriteDb: CardFilmEntityFavoriteDb) {
             viewModel.deleteCardFilm(cardFilmEntityFavoriteDb)
         }
-
     }
 
 
     override fun onDestroy() {
         binding = null
         super.onDestroy()
-
     }
 
 

@@ -56,7 +56,6 @@ class FavoriteListAdapter(private var onClickItemFavoriteFragment: OnClickItemFa
             itemView.findViewById(R.id.favorite_alternative_film_name_text_view)
         var favoriteDescription: TextView =
             itemView.findViewById(R.id.favorite_description_text_view)
-
         val deleteFromFavorite:Button = itemView.findViewById(R.id.delede_from_favorite_list_button)
     }
 }
