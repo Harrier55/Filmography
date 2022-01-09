@@ -42,12 +42,13 @@ class FilmListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.d(TAG, "onCreateView: FilmListFragment ")
-
         val view = inflater.inflate(R.layout.fragment_list_film, container, false)
-
         _binding = FragmentListFilmBinding.bind(view)
+        return view
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.nowPlayingRecyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.nowPlayingRecyclerView.adapter = myAdapter
@@ -55,11 +56,6 @@ class FilmListFragment : Fragment() {
         viewModel.myList.observe(viewLifecycleOwner, Observer {
             myAdapter.refreshListFilm(it)
         })
-        return view
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         viewModel.errorList.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 showMessageInSnackBar(view, it)
@@ -75,7 +71,10 @@ class FilmListFragment : Fragment() {
     /**инициализируем интерфейс слушателя клика на карточку фильма*/
     private var onClickListenerCardFilm = object : OnClickListenerCardFilm {
         override fun onClickItemCardFilm(cardFilmEntity: CardFilmEntity) {
-            Log.d(TAG, "FilmListFragment  onClickItemCardFilm:  myOnClickListener + " + cardFilmEntity.idKp.toString())
+            Log.d(
+                TAG,
+                "FilmListFragment  onClickItemCardFilm:  myOnClickListener + " + cardFilmEntity.idKp.toString()
+            )
             viewModel.addCardFilmToFavoriteFragment(cardFilmEntity)
         }
     }

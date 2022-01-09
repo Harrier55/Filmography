@@ -1,6 +1,5 @@
-package ru.harrier55.project.filmography.data
+package ru.harrier55.project.filmography.data.webconnection
 
-import KinopoiskReview
 import android.util.Log
 import com.example.example.KinopoiskMovie
 
@@ -10,6 +9,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import ru.harrier55.project.filmography.data.webconnection.OnRequestCompleteListener
 
 //interface RetrofitService {
 //    @GET("review?search=325&field=movieId&page=5&limit=10&token=68MMRD5-PBNMTR6-NREDMZQ-HDHYHYS")

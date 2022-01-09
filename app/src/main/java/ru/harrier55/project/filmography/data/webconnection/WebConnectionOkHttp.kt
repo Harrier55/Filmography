@@ -1,4 +1,4 @@
-package ru.harrier55.project.filmography.data
+package ru.harrier55.project.filmography.data.webconnection
 
 import android.util.Log
 import com.example.example.KinopoiskMovie

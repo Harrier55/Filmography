@@ -9,7 +9,7 @@ import com.example.example.KinopoiskMovie
 
 import ru.harrier55.project.filmography.domain.entities.CardFilmEntity
 import ru.harrier55.project.filmography.data.MyApp
-import ru.harrier55.project.filmography.data.OnRequestCompleteListener
+import ru.harrier55.project.filmography.data.webconnection.OnRequestCompleteListener
 import ru.harrier55.project.filmography.domain.repo.CardFilmRepoFavoriteDataBaseImpl
 
 class FilmListFragmentViewModel : ViewModel() {

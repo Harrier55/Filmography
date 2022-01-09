@@ -24,9 +24,6 @@ class FavoriteFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        //      cardFilmRepo.createdCardFilm()  // для создания одной записи в БД
-
         viewModel.getData()
     }
 
@@ -37,6 +34,11 @@ class FavoriteFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_favorite, container, false)
         binding = FragmentFavoriteBinding.bind(view)
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding!!.favoriteRecyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding!!.favoriteRecyclerView.adapter = myAdapter
@@ -44,7 +46,6 @@ class FavoriteFragment : Fragment() {
         viewModel.myListFavoriteFilm.observe(viewLifecycleOwner, Observer {
             myAdapter.refreshList(it)
         })
-        return view
     }
 
     /**Инициализация интерфейса слушателя */
