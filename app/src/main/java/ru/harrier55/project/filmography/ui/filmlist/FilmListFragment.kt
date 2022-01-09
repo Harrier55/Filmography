@@ -77,6 +77,8 @@ class FilmListFragment : Fragment() {
         override fun onClickItemCardFilm(cardFilmEntity: CardFilmEntity) {
             Log.d(TAG, "FilmListFragment  onClickItemCardFilm:  myOnClickListener + " + cardFilmEntity.idKp.toString())
 
+            // todo желательно реализовать Алерт диалог для добавления в Favorite
+
             viewModel.addCardFilmToFavoriteFragment(cardFilmEntity)
 
 

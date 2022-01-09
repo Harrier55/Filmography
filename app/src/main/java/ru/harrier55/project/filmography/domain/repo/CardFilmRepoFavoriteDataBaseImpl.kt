@@ -17,33 +17,39 @@ class CardFilmRepoFavoriteDataBaseImpl : IFilmRepoDb {
     /**  в этот метод приходит CardFilmEntity и затем преобразовавается в формат для бвзы данных
      * так как это разные объекты*/
     override fun createdCardFilm(cardFilmEntity: CardFilmEntity) {
-
-
         Thread {
-                favoriteDataBase.insertCardFilmEntity(CardFilmEntityFavoriteDb(null,
-                cardFilmEntity.idKp,
-                cardFilmEntity.filmPoster,
-                cardFilmEntity.filmName,
-                cardFilmEntity.filmYear_premiere,
-                cardFilmEntity.description,
-                cardFilmEntity.filmRating,
-                cardFilmEntity.alternativeName))
+            favoriteDataBase.insertCardFilmEntity(
+                CardFilmEntityFavoriteDb(
+                    null,
+                    cardFilmEntity.idKp,
+                    cardFilmEntity.filmPoster,
+                    cardFilmEntity.filmName,
+                    cardFilmEntity.filmYear_premiere,
+                    cardFilmEntity.description,
+                    cardFilmEntity.filmRating,
+                    cardFilmEntity.alternativeName
+                )
+            )
 
         }.start()
     }
 
     override fun updateCardFilm() {
-        // TODO("Not yet implemented")
     }
 
-    override fun deleteCardFilm() {
-        // TODO("Not yet implemented")
+    override fun deleteCardFilm(cardFilmEntityFavoriteDb: CardFilmEntityFavoriteDb) {
+        Thread {
+            favoriteDataBase.deleteCardFilmEntity(cardFilmEntityFavoriteDb)
+        }.start()
     }
 
-    override fun getCardFilmFromDataBase(onRequestCompleteDataBaseListener: OnRequestCompleteDataBaseListener) {
+    override fun getCardFilmListFromDataBase(onRequestCompleteDataBaseListener: OnRequestCompleteDataBaseListener) {
         Thread {
             cardFilms = favoriteDataBase.getListCardFilmEntityFavorite()
-            Log.d(TAG, "CardFilmRepoFavoriteDataBaseImpl getCardFilmFromDataBase: " + cardFilms.toString())
+            Log.d(
+                TAG,
+                "CardFilmRepoFavoriteDataBaseImpl getCardFilmFromDataBase: " + cardFilms.toString()
+            )
             onRequestCompleteDataBaseListener.getDataFromDb(cardFilms)
         }.start()
 

@@ -17,7 +17,7 @@ import ru.harrier55.project.filmography.domain.repo.CardFilmRepoFavoriteDataBase
 class FavoriteFragment : Fragment() {
 
     private var binding: FragmentFavoriteBinding? = null
-    private val myAdapter by lazy { FavoriteListAdapter() }
+    private val myAdapter by lazy { FavoriteListAdapter(onClickItemFavoriteFragment) }
     private var cardFilms: List<CardFilmEntityFavoriteDb> = mutableListOf()
     private val cardFilmRepo by lazy { CardFilmRepoFavoriteDataBaseImpl() }
     private val viewModel by lazy { ViewModelProvider(this)[FavoriteFragmentViewModel::class.java] }
@@ -45,6 +45,13 @@ class FavoriteFragment : Fragment() {
             myAdapter.refreshList(it)
         })
         return view
+    }
+
+    private val onClickItemFavoriteFragment = object : OnClickItemFavoriteFragment{
+        override fun onClickDeleteButton(cardFilmEntityFavoriteDb: CardFilmEntityFavoriteDb) {
+            viewModel.deleteCardFilm(cardFilmEntityFavoriteDb)
+        }
+
     }
 
 

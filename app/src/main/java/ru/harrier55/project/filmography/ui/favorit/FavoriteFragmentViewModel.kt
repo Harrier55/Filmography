@@ -12,8 +12,12 @@ class FavoriteFragmentViewModel: ViewModel() {
     var myListFavoriteFilm = MutableLiveData<List<CardFilmEntityFavoriteDb>>()
 
      fun getData(){
-        cardFilmRepoDb.getCardFilmFromDataBase(onRequestCompleteDataBaseListener)
+        cardFilmRepoDb.getCardFilmListFromDataBase(onRequestCompleteDataBaseListener)
+    }
 
+    fun deleteCardFilm(cardFilmEntityFavoriteDb: CardFilmEntityFavoriteDb){
+        cardFilmRepoDb.deleteCardFilm(cardFilmEntityFavoriteDb)
+        getData()
     }
 
     /** инициализация интерфейса onRequestCompleteDataBaseListener, он сообщит,
