@@ -9,7 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 
 import androidx.lifecycle.*
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import ru.harrier55.project.filmography.R
 
@@ -24,7 +26,8 @@ class FilmListFragment : Fragment() {
     private var _binding: FragmentListFilmBinding? = null
     private val binding get() = _binding!!
     private val viewModel by lazy { ViewModelProvider(this)[FilmListFragmentViewModel::class.java] }
-    private val myAdapter by lazy { NowPlayingListAdapter(onClickListenerCardFilm) }
+    private val myCardFilmAdapter by lazy { NowPlayingListAdapter(onClickListenerCardFilm) }
+    private val myNavigationButtonAdapter by lazy { FilmListNavigationButtonAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,18 +52,25 @@ class FilmListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.nowPlayingRecyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        binding.nowPlayingRecyclerView.adapter = myAdapter
+        binding.nowPlayingRecyclerView.adapter = myCardFilmAdapter
 
         viewModel.myList.observe(viewLifecycleOwner, Observer {
-            myAdapter.refreshListFilm(it)
+            myCardFilmAdapter.refreshListFilm(it)
         })
         viewModel.errorList.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 showMessageInSnackBar(view, it)
             }
         })
+
+        /**навигация */
+
+        binding.navigationFilmRecyclerView.layoutManager =
+            GridLayoutManager(context, 4, RecyclerView.VERTICAL, false)
+        binding.navigationFilmRecyclerView.adapter = myNavigationButtonAdapter
     }
 
     override fun onDestroyView() {

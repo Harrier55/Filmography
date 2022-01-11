@@ -25,28 +25,41 @@
 
         </androidx.recyclerview.widget.RecyclerView>
 
-    </LinearLayout>
+       <androidx.recyclerview.widget.RecyclerView
+           android:id="@+id/navigation_film_recycler_view"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_gravity="center"
+           android:layout_marginTop="8dp"
+           android:layout_marginStart="16dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-
-        <TextView
-            android:id="@+id/two_title_tv"
-            style="@style/TextTitleFilmList"
-            android:text="@string/upcoming"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/others_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#C7CACA">
-
-        </androidx.recyclerview.widget.RecyclerView>
+       </androidx.recyclerview.widget.RecyclerView>
 
     </LinearLayout>
+
+
+
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical"-->
+<!--        >-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/two_title_tv"-->
+<!--            style="@style/TextTitleFilmList"-->
+<!--            android:text="@string/upcoming"/>-->
+
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/others_recycler_view"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:background="#C7CACA">-->
+
+<!--        </androidx.recyclerview.widget.RecyclerView>-->
+
+<!--    </LinearLayout>-->
 
 
 

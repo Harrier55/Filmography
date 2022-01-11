@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         Log.d(TAG, "onCreate: start MainActivity")
-        (applicationContext as MyApp).generateTestRepo(cardFilm)  // заполнить тестовый репозиторий
+//        (applicationContext as MyApp).generateTestRepo(cardFilm)  // заполнить тестовый репозиторий
         Log.d(TAG, "onCreate: start generateTestRepo")
 
         initBottomNavigation()

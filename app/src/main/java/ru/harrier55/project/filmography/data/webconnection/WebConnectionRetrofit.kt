@@ -1,5 +1,6 @@
 package ru.harrier55.project.filmography.data.webconnection
 
+import KinopoiskReview
 import android.util.Log
 import com.example.example.KinopoiskMovie
 
@@ -11,13 +12,13 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import ru.harrier55.project.filmography.data.webconnection.OnRequestCompleteListener
 
-//interface RetrofitService {
-//    @GET("review?search=325&field=movieId&page=5&limit=10&token=68MMRD5-PBNMTR6-NREDMZQ-HDHYHYS")
-//    fun getFilmListReview(): Call<KinopoiskReview>
-//}
+interface RetrofitService {
+    @GET("review?search=325&field=movieId&page=5&limit=10&token=68MMRD5-PBNMTR6-NREDMZQ-HDHYHYS")
+    fun getFilmListReview(): Call<KinopoiskReview>
+}
 
 interface RetrofitServiceMovie{
-    @GET("movie?search=2021&field=year&limit=10&token=68MMRD5-PBNMTR6-NREDMZQ-HDHYHYS")
+    @GET("movie?search=2019&field=year&limit=10&token=68MMRD5-PBNMTR6-NREDMZQ-HDHYHYS")
     fun getFilmListMovie(): Call<KinopoiskMovie>
 }
 
