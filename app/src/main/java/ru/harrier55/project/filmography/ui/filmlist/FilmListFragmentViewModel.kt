@@ -9,15 +9,18 @@ import com.example.example.KinopoiskMovie
 
 import ru.harrier55.project.filmography.domain.entities.CardFilmEntity
 import ru.harrier55.project.filmography.data.MyApp
-import ru.harrier55.project.filmography.data.OnRequestCompleteListener
+import ru.harrier55.project.filmography.data.webconnection.OnRequestCompleteListener
+import ru.harrier55.project.filmography.domain.repo.CardFilmRepoFavoriteDataBaseImpl
 
 class FilmListFragmentViewModel : ViewModel() {
 
     private val TAG: String = "@@@"
 
     private var filmList: List<CardFilmEntity> = mutableListOf()
+    private val repoFavoriteDataBaseImpl by lazy { CardFilmRepoFavoriteDataBaseImpl() }
     val myList = MutableLiveData<List<CardFilmEntity>>()
     val errorList = MutableLiveData<String?>()
+
 
     init {
         Log.d(TAG, "ViewModel_ init: ")
@@ -30,12 +33,13 @@ class FilmListFragmentViewModel : ViewModel() {
         filmList = MyApp.instance.getMyAppCardFilmRepoImpl().getCardFilmList()
         myList.postValue(filmList)
     }
+
     /** Запрос : Репозиторий,дай данные из Кинопоиска*/
     fun getDataKinopoisk() {
         MyApp.instance.getMyAppCardFilmRepoImpl().getDataKinopoisk(onRequestCompleteListener)
     }
 
-    /** имплементация интерфейса onRequestCompleteListener, он сообщит,что данные с Web пришли, т.к запрос асинхронный*/
+    /** инициализация интерфейса onRequestCompleteListener, он сообщит,что данные с Web пришли, т.к запрос асинхронный*/
     private var onRequestCompleteListener = object : OnRequestCompleteListener {
         override fun onSuccessReview(kinopoiskReview: KinopoiskReview) {
             Log.d(TAG, "onSuccess: start")
@@ -47,7 +51,7 @@ class FilmListFragmentViewModel : ViewModel() {
 
         override fun onSuccessMovie(kinopoiskMovie: KinopoiskMovie) {
             errorList.postValue(null)
-             /**заполняем репозиторий значениями из Web**/
+            /**заполняем репозиторий значениями из Web**/
             MyApp.instance.generateRepoFromWebKinopoiskMovie(kinopoiskMovie)
             getData()
         }
@@ -56,6 +60,11 @@ class FilmListFragmentViewModel : ViewModel() {
             Log.d(TAG, "onError:")
             errorList.postValue("Отсутствует подключение к интернету")
         }
+    }
+
+    /**метод для добабления фильма в список Favorite*/
+    fun addCardFilmToFavoriteFragment(cardFilmEntity:CardFilmEntity) {
+        repoFavoriteDataBaseImpl.createdCardFilm(cardFilmEntity)
     }
 
 

@@ -6,7 +6,7 @@ import ru.harrier55.project.filmography.R
 
 data class CardFilmEntity(
     val id: Int? = null,
-    val movieId: Int? = null,
+    val idKp: Int? = null,
     val filmPoster: String? = null,
     val filmName: String? = "Название фильма - test",
     val filmYear_premiere: Int? = 2002,

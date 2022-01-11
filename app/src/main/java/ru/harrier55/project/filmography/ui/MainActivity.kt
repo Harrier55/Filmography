@@ -3,6 +3,7 @@ package ru.harrier55.project.filmography.ui
 /**
  * lesson 6 services and Broadcastresievers is completed. PullRequest OK
  * lesson 7 Retrofit and Glide is completed. PullRequest OK
+ * lesson 8 ...
  * */
 
 import android.content.IntentFilter
@@ -18,7 +19,7 @@ import com.google.android.material.snackbar.Snackbar
 import ru.harrier55.project.filmography.R
 import ru.harrier55.project.filmography.domain.entities.CardFilmEntity
 import ru.harrier55.project.filmography.data.MyApp
-import ru.harrier55.project.filmography.ui.favorit.FavoritFragment
+import ru.harrier55.project.filmography.ui.favorit.FavoriteFragment
 import ru.harrier55.project.filmography.ui.filmlist.FilmListFragment
 import ru.harrier55.project.filmography.ui.rating.RatingsFragment
 import ru.harrier55.project.filmography.ui.broadcastresievers.MyBroadcastReceiver
@@ -29,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var bottomNavigation: BottomNavigationView
     private var filmListFragment: FilmListFragment = FilmListFragment()
-    private var favoritFragment: FavoritFragment = FavoritFragment()
+    private var favoritFragment: FavoriteFragment = FavoriteFragment()
     private var ratingsFragment: RatingsFragment = RatingsFragment()
     private var cardFilm = CardFilmEntity()
 
@@ -39,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         Log.d(TAG, "onCreate: start MainActivity")
-        (applicationContext as MyApp).generateTestRepo(cardFilm)  // заполнить тестовый репозиторий
+//        (applicationContext as MyApp).generateTestRepo(cardFilm)  // заполнить тестовый репозиторий
         Log.d(TAG, "onCreate: start generateTestRepo")
 
         initBottomNavigation()

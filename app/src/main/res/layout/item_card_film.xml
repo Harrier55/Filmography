@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="200dp"
     android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusable="true"
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.cardview.widget.CardView
@@ -26,7 +28,6 @@
                 android:id="@+id/film_poster_image_view"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:clickable="true"
                 tools:src="@drawable/star_wars"
                 />
             <TextView
