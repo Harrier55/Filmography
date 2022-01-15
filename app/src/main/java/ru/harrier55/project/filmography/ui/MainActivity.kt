@@ -3,8 +3,8 @@ package ru.harrier55.project.filmography.ui
 /**
  * lesson 6 services and Broadcastresievers is completed. PullRequest OK
  * lesson 7 Retrofit and Glide is completed. PullRequest OK
- * lesson 8 ...
- * */
+ * lesson 8 Room and change UI interface. Pull Request OK
+ * lesson 8 Permissions */
 
 import android.content.IntentFilter
 import android.net.ConnectivityManager
