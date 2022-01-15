@@ -113,9 +113,9 @@ class MainActivity : AppCompatActivity() {
     /** Управляющий метод проверки разрешений*/
     private fun checkedPermissionApplication() {
 
-        when (isPermissionGranted(targetPermissionGps)) {
-            true -> Toast.makeText(this, "Можно работать", Toast.LENGTH_SHORT).show()
-            false -> when (shouldShowRequestPermissionRationale(targetPermissionGps)) {
+        if(!isPermissionGranted(targetPermissionGps)){
+
+            when(shouldShowRequestPermissionRationale(targetPermissionGps)){
                 true -> requestPermission(targetPermissionGps)
                 false -> showSimpleAlert()
             }
