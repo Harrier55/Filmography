@@ -10,5 +10,8 @@
     <string name="request_uses_GPS">Запрос на использование GPS</string>
     <string name="description_request_uses_Gps">Для корректной работы приложению нужен доступ к геопозиции GPS. Перейти к настройкам телефона и разрешить использование</string>
     <string name="api_key">AIzaSyDct_jenp-DitM2oWcNyWf4i0HJQmaDcOk</string>
+    <string name="home">Home</string>
+    <string name="favorite">Favorite</string>
+    <string name="maps">Maps</string>
 
 </resources>

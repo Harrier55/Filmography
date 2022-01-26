@@ -1,4 +1,4 @@
-package ru.harrier55.project.filmography
+package ru.harrier55.project.filmography.ui.googlemaps
 
 import androidx.fragment.app.Fragment
 
@@ -8,11 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import ru.harrier55.project.filmography.R
 
 class MapsFragment : Fragment() {
 
@@ -27,6 +27,7 @@ class MapsFragment : Fragment() {
          * user has installed Google Play services and returned to the app.
          */
         val sydney = LatLng(-34.0, 151.0)
+        googleMap.uiSettings.isZoomControlsEnabled = true
         googleMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
     }
