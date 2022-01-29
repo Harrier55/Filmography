@@ -1,21 +1,20 @@
 package ru.harrier55.project.filmography.ui.googlemaps
 
-import android.provider.Settings.Global.getString
+
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.android.gms.maps.model.LatLng
 import com.google.gson.Gson
-import ru.harrier55.project.filmography.R
+
 import ru.harrier55.project.filmography.data.PlacesRootClass
 import ru.harrier55.project.filmography.data.webconnection.WebConnectionOkHttp
+import java.io.IOException
 
-private const val MAPS_PLACE_TYPES = "restaurant"
-private const val MAPS_PLACE_ZOOM = 15f
+private const val MAPS_PLACE_TYPES = "movie_theater"
 
 
 class MapsFragmentViewModel : ViewModel() {
-
 
     private lateinit var placesRootClass: PlacesRootClass
     private val webConnectionOkHttp by lazy { WebConnectionOkHttp() }
@@ -25,8 +24,12 @@ class MapsFragmentViewModel : ViewModel() {
     val placesRootClassStorage: LiveData<PlacesRootClass>
         get() = _placesRootClassStorage
 
+    private val _errorList = MutableLiveData<IOException>()
+    val errorList: LiveData<IOException>
+        get() = _errorList
 
-     fun getDataFromGooglePlacesApi(position: LatLng, key: String) {
+
+    fun getDataFromGooglePlacesApi(position: LatLng, key: String) {
 
         val urlPlacesApi =
             "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${position.latitude},${position.longitude}&radius=300&type=$MAPS_PLACE_TYPES&key=$key" // Tay
@@ -39,8 +42,8 @@ class MapsFragmentViewModel : ViewModel() {
             _placesRootClassStorage.postValue(placesRootClass)
         }
 
-        override fun errorPlacesFromGooglePlacesApi() {
-            // todo
+        override fun errorPlacesFromGooglePlacesApi(e: IOException) {
+            _errorList.postValue(e)
         }
     }
 }

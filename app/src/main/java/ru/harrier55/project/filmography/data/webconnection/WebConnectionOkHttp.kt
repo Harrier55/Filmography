@@ -25,7 +25,7 @@ class WebConnectionOkHttp {
                 e.printStackTrace()
                 Log.d(TAG, "onFailure: ", e)
                 /**Callback Error in the View Model**/
-                onCallbackFromGooglePlacesApi.errorPlacesFromGooglePlacesApi()
+                onCallbackFromGooglePlacesApi.errorPlacesFromGooglePlacesApi( e)
             }
 
             override fun onResponse(call: Call, response: Response) {

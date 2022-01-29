@@ -5,7 +5,7 @@ package ru.harrier55.project.filmography.ui
  * lesson 7 Retrofit and Glide is completed. PullRequest OK
  * lesson 8 Room and change UI interface. Pull Request OK
  * lesson 9 Permissions  Pull RequestOK
- * lesson 10 Google Maps start*/
+ * lesson 10 Google Maps Pull Request OK*/
 
 import android.content.Intent
 import android.content.IntentFilter
