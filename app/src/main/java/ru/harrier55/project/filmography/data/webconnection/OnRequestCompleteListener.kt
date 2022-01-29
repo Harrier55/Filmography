@@ -10,4 +10,5 @@ interface OnRequestCompleteListener {
     fun onSuccessReview(kinopoiskReview: KinopoiskReview)
     fun onSuccessMovie(kinopoiskMovie: KinopoiskMovie)
     fun onError()
+
 }
