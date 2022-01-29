@@ -4,7 +4,8 @@ package ru.harrier55.project.filmography.ui
  * lesson 6 services and Broadcastresievers is completed. PullRequest OK
  * lesson 7 Retrofit and Glide is completed. PullRequest OK
  * lesson 8 Room and change UI interface. Pull Request OK
- * lesson 8 Permissions */
+ * lesson 9 Permissions  Pull RequestOK
+ * lesson 10 Google Maps Pull Request OK*/
 
 import android.content.Intent
 import android.content.IntentFilter
@@ -22,6 +23,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
+import ru.harrier55.project.filmography.ui.googlemaps.MapsFragment
 import ru.harrier55.project.filmography.R
 import ru.harrier55.project.filmography.ui.broadcastresievers.MyBroadcastReceiver
 import ru.harrier55.project.filmography.ui.favorit.FavoriteFragment
@@ -36,6 +38,7 @@ class MainActivity : AppCompatActivity() {
     private var filmListFragment: FilmListFragment = FilmListFragment()
     private var favoritFragment: FavoriteFragment = FavoriteFragment()
     private var ratingsFragment: RatingsFragment = RatingsFragment()
+    private var mapsFragment: MapsFragment = MapsFragment()
 
     private val targetPermissionGps: String = android.Manifest.permission.ACCESS_FINE_LOCATION
     private var REQUEST_CODE_PERMISSION_READ_CONTACTS: Int = 11
@@ -69,8 +72,8 @@ class MainActivity : AppCompatActivity() {
                     initFragmentManager(favoritFragment)
                     true
                 }
-                R.id.ratings_bottom_navigation -> {
-                    initFragmentManager(ratingsFragment)
+                R.id.maps_bottom_navigation -> {
+                    initFragmentManager(mapsFragment)
                     true
                 }
                 else -> {
